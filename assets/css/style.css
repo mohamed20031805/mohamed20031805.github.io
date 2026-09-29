@@ -49,6 +49,11 @@ section{padding-top:52px}
 .vbar button:focus-visible{outline:2px solid #E7C061;outline-offset:2px}
 .vhint{position:absolute;right:12px;bottom:14px;font-family:"IBM Plex Mono",monospace;
   font-size:11px;color:rgba(237,238,234,.62);pointer-events:none}
+.viewer.is-down{min-height:220px;display:flex;align-items:center;justify-content:center}
+.viewer.is-down canvas,.viewer.is-down .vbar,.viewer.is-down .vhint,.viewer.is-down .compass{display:none}
+.vnote{max-width:46ch;padding:28px 26px;text-align:center;color:#EDEEEA;font-size:14px;line-height:1.55}
+.vnote strong{display:block;font-weight:600;font-size:16px;margin-bottom:8px}
+.vnote span{display:block;color:rgba(237,238,234,.7)}
 .compass{position:absolute;right:14px;top:12px;font-family:"IBM Plex Mono",monospace;
   font-size:11px;color:rgba(237,238,234,.75);text-align:center;pointer-events:none;line-height:1.2}
 .compass span{display:block;font-size:15px}
