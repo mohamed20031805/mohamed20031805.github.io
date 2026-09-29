@@ -139,7 +139,14 @@
 
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<!-- three.js r128, bundled locally so the page also works offline -->
+<script src="assets/js/vendor/three.min.js"></script>
+<script>
+/* if the local copy is missing (e.g. Git LFS or a partial upload), fall back to a CDN */
+if(!window.THREE){
+  document.write('<scr'+'ipt src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"><\/scr'+'ipt>');
+}
+</script>
 <script src="assets/js/drawings.js"></script>
 <script src="assets/js/scene3d.js"></script>
 </body>
