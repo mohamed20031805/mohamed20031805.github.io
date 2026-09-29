@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Commercial &amp; leisure complex &mdash; Fqih Ben Salah</title>
-<meta name="description" content="Concept design for a 350 m2 single-storey commercial and leisure complex in Fqih Ben Salah, Morocco: fast food and gaming zone, with site plan, floor plan, elevation and 3D view.">
-<meta property="og:title" content="Commercial &amp; leisure complex — Fqih Ben Salah">
-<meta property="og:description" content="7.00 x 50.00 m steel-frame pavilion — 91 m2 fast food, 259 m2 gaming zone.">
+<title>Complexe commercial et loisirs &mdash; Fqih Ben Salah</title>
+<meta name="description" content="Avant-projet d'un complexe commercial et loisirs de 350 m2 de plain-pied à Fqih Ben Salah, Maroc : fast food et espace gaming, avec plan masse, plan, façade et vue 3D.">
+<meta property="og:title" content="Complexe commercial et loisirs — Fqih Ben Salah">
+<meta property="og:description" content="Bâtiment métallique de 7,00 x 50,00 m — 91 m2 de fast food, 259 m2 d'espace gaming.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,132 +17,133 @@
 <div class="wrap">
 
 <header class="sheet">
-  <h1>Commercial &amp; leisure complex</h1>
-  <p class="loc">Fqih Ben Salah · Béni Mellal-Khénifra · Morocco — plot adjoining Marjane</p>
+  <h1>Complexe commercial et loisirs</h1>
+  <p class="loc">Fqih Ben Salah · Béni Mellal-Khénifra · Maroc — terrain mitoyen de Marjane</p>
   <div class="meta">
-    <span><b>350 m²</b> building footprint</span>
-    <span><b>7.00 × 50.00 m</b> single storey</span>
-    <span><b>91 m²</b> fast food</span>
-    <span><b>259 m²</b> gaming zone</span>
-    <span><b>39</b> parking spaces</span>
+    <span><b>350 m²</b> d'emprise au sol</span>
+    <span><b>7,00 × 50,00 m</b> de plain-pied</span>
+    <span><b>91 m²</b> de fast food</span>
+    <span><b>259 m²</b> d'espace gaming</span>
+    <span><b>39</b> places de parking</span>
   </div>
 </header>
 
 <section id="v3d">
-  <div class="shead"><span class="no">01</span><h2>Aerial view</h2><span class="scale">interactive</span></div>
-  <p class="note">A long, low steel bar set parallel to Marjane, with its full glazed side turned toward the
-  car park so both businesses are read from the Marjane forecourt. Drag to orbit, scroll to zoom,
-  and lift the roof to see how the two programmes are laid out inside.</p>
+  <div class="shead"><span class="no">01</span><h2>Vue aérienne</h2><span class="scale">interactif</span></div>
+  <p class="note">Un volume bas et allongé, posé parallèlement à Marjane, dont toute la façade vitrée
+  est tournée vers le parking : les deux commerces se lisent depuis le parvis de Marjane. Faites
+  glisser pour tourner autour, molette pour zoomer, et enlevez le toit pour voir l'organisation
+  intérieure.</p>
   <div class="viewer" id="viewer">
     <canvas id="scene"></canvas>
     <div class="compass"><span>↑</span>N</div>
     <div class="vbar">
-      <button id="btnRoof" type="button">Lift the roof</button>
-      <button id="btnView" type="button">Reset view</button>
+      <button id="btnRoof" type="button">Enlever le toit</button>
+      <button id="btnView" type="button">Vue initiale</button>
     </div>
-    <p class="vhint">drag to orbit · scroll to zoom</p>
+    <p class="vhint">glisser pour tourner · molette pour zoomer</p>
   </div>
 </section>
 
 <section id="site">
-  <div class="shead"><span class="no">02</span><h2>Site plan</h2><span class="scale">1:400 @ A3</span></div>
-  <p class="note">Marjane sits to the east, so the car park is placed entirely on that side and the building
-  screens it from the public road. One-way circulation: vehicles enter at the south gate, loop
-  counter-clockwise through the two aisles and leave by the north gate. The gaming hall occupies the
-  southern 37 m, the fast food and its terrace the northern 13 m.</p>
+  <div class="shead"><span class="no">02</span><h2>Plan masse</h2><span class="scale">1:400 sur A3</span></div>
+  <p class="note">Marjane se trouve à l'est : tout le parking est donc placé de ce côté, et le bâtiment
+  le masque depuis la route publique. Circulation en sens unique — les véhicules entrent par le
+  portail sud, tournent dans le sens antihoraire entre les deux allées et ressortent au nord.
+  L'espace gaming occupe les 37 m au sud, le fast food et sa terrasse les 13 m au nord.</p>
   <div class="frame"><div id="sitePlan" class="dw"></div></div>
 </section>
 
 <section id="plan">
-  <div class="shead"><span class="no">03</span><h2>Floor plan</h2><span class="scale">1:150 @ A3</span></div>
-  <p class="note">A single 7.00 m clear span with no internal columns, so the gaming hall stays completely
-  free. The only fixed masonry core is the sanitary block at the junction, which serves both
-  businesses and keeps all plumbing in one place.</p>
+  <div class="shead"><span class="no">03</span><h2>Plan du bâtiment</h2><span class="scale">1:150 sur A3</span></div>
+  <p class="note">Une portée libre de 7,00 m sans aucun poteau intérieur, pour que la salle gaming reste
+  totalement dégagée. Le seul noyau maçonné fixe est le bloc sanitaire placé à la jonction : il sert
+  les deux commerces et regroupe toute la plomberie au même endroit.</p>
   <div class="frame"><div id="floorPlan" class="dw"></div></div>
 </section>
 
 <section id="elev">
-  <div class="shead"><span class="no">04</span><h2>East elevation &amp; cross section</h2><span class="scale">1:200 / 1:100</span></div>
-  <p class="note">Total height 5.20 m to the top of the parapet, which hides a 3% roof fall and the
-  gutter. The roof carries nothing else.</p>
+  <div class="shead"><span class="no">04</span><h2>Façade est et coupe transversale</h2><span class="scale">1:200 / 1:100</span></div>
+  <p class="note">Hauteur totale de 5,20 m au sommet de l'acrotère, qui masque la pente de toiture de 3 %
+  et le chéneau. La toiture ne reçoit rien d'autre.</p>
   <div class="frame"><div id="elevation" class="dw"></div></div>
   <div class="frame" style="margin-top:14px"><div id="section" class="dw"></div></div>
 </section>
 
 <section id="prog">
-  <div class="shead"><span class="no">05</span><h2>Areas &amp; construction</h2><span class="scale">indicative</span></div>
+  <div class="shead"><span class="no">05</span><h2>Surfaces et construction</h2><span class="scale">indicatif</span></div>
   <div class="cols">
     <div>
       <table>
-        <thead><tr><th>Space</th><th style="text-align:right">Length</th><th style="text-align:right">Area</th></tr></thead>
+        <thead><tr><th>Espace</th><th style="text-align:right">Longueur</th><th style="text-align:right">Surface</th></tr></thead>
         <tbody>
-          <tr><td><span class="swatch" style="background:#B4792A"></span>Kitchen &amp; cold store</td><td class="n">4.00 m</td><td class="n">28.0 m²</td></tr>
-          <tr><td><span class="swatch" style="background:#B4792A"></span>Service counter</td><td class="n">1.50 m</td><td class="n">10.5 m²</td></tr>
-          <tr><td><span class="swatch" style="background:#B4792A"></span>Indoor seating</td><td class="n">5.50 m</td><td class="n">38.5 m²</td></tr>
-          <tr><td><span class="swatch" style="background:#B4792A"></span>Sanitary block (shared)</td><td class="n">2.00 m</td><td class="n">14.0 m²</td></tr>
-          <tr class="tot"><td>Fast food</td><td class="n">13.00 m</td><td class="n">91.0 m²</td></tr>
-          <tr><td><span class="swatch" style="background:#2A5F86"></span>Reception &amp; tokens</td><td class="n">3.00 m</td><td class="n">21.0 m²</td></tr>
-          <tr><td><span class="swatch" style="background:#2A5F86"></span>PC gaming — 24 stations</td><td class="n">12.00 m</td><td class="n">84.0 m²</td></tr>
-          <tr><td><span class="swatch" style="background:#2A5F86"></span>Console lounge &amp; screens</td><td class="n">9.00 m</td><td class="n">63.0 m²</td></tr>
-          <tr><td><span class="swatch" style="background:#2A5F86"></span>Token arcade machines</td><td class="n">8.00 m</td><td class="n">56.0 m²</td></tr>
-          <tr><td><span class="swatch" style="background:#2A5F86"></span>Tournament room, staff, store</td><td class="n">5.00 m</td><td class="n">35.0 m²</td></tr>
-          <tr class="tot"><td>Gaming zone</td><td class="n">37.00 m</td><td class="n">259.0 m²</td></tr>
-          <tr class="tot"><td>Building</td><td class="n">50.00 m</td><td class="n">350.0 m²</td></tr>
+          <tr><td><span class="swatch" style="background:#2A5F86"></span>Accueil et jetons</td><td class="n">3,00 m</td><td class="n">21,0 m²</td></tr>
+          <tr><td><span class="swatch" style="background:#2A5F86"></span>PC gaming — 24 postes</td><td class="n">12,00 m</td><td class="n">84,0 m²</td></tr>
+          <tr><td><span class="swatch" style="background:#2A5F86"></span>Consoles et écrans</td><td class="n">9,00 m</td><td class="n">63,0 m²</td></tr>
+          <tr><td><span class="swatch" style="background:#2A5F86"></span>Arcade à jetons</td><td class="n">8,00 m</td><td class="n">56,0 m²</td></tr>
+          <tr><td><span class="swatch" style="background:#2A5F86"></span>Salle de tournois, personnel, stock</td><td class="n">5,00 m</td><td class="n">35,0 m²</td></tr>
+          <tr class="tot"><td>Espace gaming</td><td class="n">37,00 m</td><td class="n">259,0 m²</td></tr>
+          <tr><td><span class="swatch" style="background:#B4792A"></span>Bloc sanitaire (partagé)</td><td class="n">2,00 m</td><td class="n">14,0 m²</td></tr>
+          <tr><td><span class="swatch" style="background:#B4792A"></span>Salle de consommation</td><td class="n">5,50 m</td><td class="n">38,5 m²</td></tr>
+          <tr><td><span class="swatch" style="background:#B4792A"></span>Comptoir de service</td><td class="n">1,50 m</td><td class="n">10,5 m²</td></tr>
+          <tr><td><span class="swatch" style="background:#B4792A"></span>Cuisine et chambre froide</td><td class="n">4,00 m</td><td class="n">28,0 m²</td></tr>
+          <tr class="tot"><td>Fast food</td><td class="n">13,00 m</td><td class="n">91,0 m²</td></tr>
+          <tr class="tot"><td>Bâtiment</td><td class="n">50,00 m</td><td class="n">350,0 m²</td></tr>
         </tbody>
       </table>
       <table style="margin-top:22px">
-        <thead><tr><th>Outdoor</th><th style="text-align:right">Area</th></tr></thead>
+        <thead><tr><th>Extérieur</th><th style="text-align:right">Surface</th></tr></thead>
         <tbody>
-          <tr><td>Fast food terrace (paved, 6 parasols)</td><td class="n">78 m²</td></tr>
-          <tr><td>Car park, aisles and access drives</td><td class="n">≈ 1 240 m²</td></tr>
-          <tr><td>Pedestrian walkway</td><td class="n">111 m²</td></tr>
-          <tr><td>Lawn</td><td class="n">≈ 330 m²</td></tr>
-          <tr class="tot"><td>Plot 40.00 × 66.00 m</td><td class="n">2 640 m²</td></tr>
+          <tr><td>Terrasse du fast food (pavée, 6 parasols)</td><td class="n">78 m²</td></tr>
+          <tr><td>Parking, allées et voies d'accès</td><td class="n">≈ 1 240 m²</td></tr>
+          <tr><td>Cheminement piéton</td><td class="n">111 m²</td></tr>
+          <tr><td>Pelouse</td><td class="n">≈ 330 m²</td></tr>
+          <tr class="tot"><td>Terrain 40,00 × 66,00 m</td><td class="n">2 640 m²</td></tr>
         </tbody>
       </table>
     </div>
     <div class="spec">
       <dl>
         <dt>Structure</dt>
-        <dd>Eleven galvanised steel portal frames at 5.00 m centres, 7.00 m clear span, IPE 160 rafters
-        on HEA 140 posts. Isolated footings on a 15 cm reinforced slab.</dd>
-        <dt>Walls</dt>
-        <dd>60 mm polyurethane sandwich panel (Dalakit type) on the west, north and south faces,
-        white micro-ribbed finish. 1.00 m blockwork base to take knocks.</dd>
-        <dt>East facade</dt>
-        <dd>Aluminium curtain wall, 6/12/6 double glazing with solar control, set back 0.60 m under the
-        roof edge so the glass is shaded at midday.</dd>
-        <dt>Roof</dt>
-        <dd>Flat sandwich panel deck at 3% fall to a concealed gutter on the west side. Nothing is built
-        on it — no terrace, no plant room, no second level.</dd>
-        <dt>Services</dt>
-        <dd>All wet points grouped in the sanitary block and the kitchen wall. Split air conditioning,
-        with the condensers at ground level in the west service yard, out of sight from Marjane.</dd>
-        <dt>Signage</dt>
-        <dd>Two backlit boxes on the parapet, aligned with the two entrances, readable from the Marjane
-        car park and from the fuel station approach.</dd>
-        <dt>Landscaping</dt>
-        <dd>Lawn only, on the perimeter strips, with drip irrigation. No water features, no planters,
-        no decorative paving.</dd>
+        <dd>Onze portiques métalliques galvanisés tous les 5,00 m, portée libre de 7,00 m, traverses
+        IPE 160 sur poteaux HEA 140. Semelles isolées et dallage armé de 15 cm.</dd>
+        <dt>Murs</dt>
+        <dd>Panneau sandwich polyuréthane de 60 mm (type Dalakit) sur les faces ouest, nord et sud,
+        finition blanche micro-nervurée. Soubassement en agglo sur 1,00 m pour encaisser les chocs.</dd>
+        <dt>Façade est</dt>
+        <dd>Mur-rideau aluminium, double vitrage 6/12/6 à contrôle solaire, en retrait de 0,60 m sous
+        la rive de toiture pour que le vitrage soit ombré en milieu de journée.</dd>
+        <dt>Toiture</dt>
+        <dd>Panneau sandwich en terrasse, pente de 3 % vers un chéneau encaissé côté ouest. Rien n'est
+        construit dessus : ni terrasse, ni local technique, ni étage.</dd>
+        <dt>Réseaux</dt>
+        <dd>Tous les points d'eau regroupés dans le bloc sanitaire et le mur de la cuisine.
+        Climatisation en split, groupes extérieurs au sol dans la cour de service ouest, invisibles
+        depuis Marjane.</dd>
+        <dt>Enseignes</dt>
+        <dd>Deux caissons lumineux sur l'acrotère, dans l'axe des deux entrées, lisibles depuis le
+        parking de Marjane et depuis l'arrivée de la station-service.</dd>
+        <dt>Espaces verts</dt>
+        <dd>Pelouse uniquement, sur les bandes périphériques, avec arrosage goutte-à-goutte. Ni bassin,
+        ni jardinière, ni dallage décoratif.</dd>
       </dl>
     </div>
   </div>
 </section>
 
 <div class="titleblock">
-  <div><span>Project</span>Commercial &amp; leisure complex</div>
-  <div><span>Location</span>Fqih Ben Salah, Morocco</div>
-  <div><span>Stage</span>Concept design</div>
-  <div><span>Footprint</span>7.00 × 50.00 m — 350 m²</div>
-  <div><span>Sheet</span>A-01 · 04 drawings</div>
+  <div><span>Projet</span>Complexe commercial et loisirs</div>
+  <div><span>Lieu</span>Fqih Ben Salah, Maroc</div>
+  <div><span>Phase</span>Avant-projet</div>
+  <div><span>Emprise</span>7,00 × 50,00 m — 350 m²</div>
+  <div><span>Planche</span>A-01 · 4 dessins</div>
 </div>
 
 </div>
-
-<!-- three.js r128, bundled locally so the page also works offline -->
+<!-- three.js r128, embarqué localement pour que la page fonctionne aussi hors ligne -->
 <script src="assets/js/vendor/three.min.js"></script>
 <script>
-/* if the local copy is missing (e.g. Git LFS or a partial upload), fall back to a CDN */
+/* si la copie locale manque (envoi partiel du dépôt), on retombe sur un CDN */
 if(!window.THREE){
   document.write('<scr'+'ipt src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"><\/scr'+'ipt>');
 }
