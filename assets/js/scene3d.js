@@ -6,9 +6,30 @@
    world: X = east, Z = south (north is -Z). y_site = 66 - z
    ============================================================ */
 (function(){
-  if(!window.THREE){ return; }
   var host=document.getElementById('viewer'), cv=document.getElementById('scene');
-  var renderer=new THREE.WebGLRenderer({canvas:cv,antialias:true});
+  if(!host||!cv){ return; }
+
+  /* the viewer must never sit there as a silent black rectangle */
+  function fail(headline, detail){
+    var n=document.createElement('div');
+    n.className='vnote';
+    n.innerHTML='<strong>'+headline+'</strong>'+(detail?'<span>'+detail+'</span>':'');
+    host.appendChild(n); host.classList.add('is-down');
+    if(window.console) console.error('[3D view] '+headline, detail||'');
+  }
+  if(!window.THREE){
+    fail('The 3D view could not load.',
+         'three.js is missing. Check that assets/js/vendor/three.min.js was uploaded, or open the page with an internet connection.');
+    return;
+  }
+  var renderer;
+  try{
+    renderer=new THREE.WebGLRenderer({canvas:cv,antialias:true});
+  }catch(err){
+    fail('This browser cannot display the 3D view.',
+         'WebGL is unavailable or disabled. The plans below work in every browser.');
+    return;
+  }
   renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
   renderer.shadowMap.enabled=true; renderer.shadowMap.type=THREE.PCFSoftShadowMap;
   if(THREE.sRGBEncoding) renderer.outputEncoding=THREE.sRGBEncoding;
@@ -312,7 +333,8 @@
   window.addEventListener('resize',resize);
 
   /* one orchestrated entrance: ease the camera in once */
-  applyCam(); resize();
+  try{ applyCam(); resize(); }
+  catch(err){ fail('The 3D view stopped while drawing.', String(err && err.message || err)); return; }
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(!reduce){
     var start=null, d0=215, d1=CAM0.dist, dur=1400;
