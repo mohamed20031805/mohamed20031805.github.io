@@ -1,15 +1,15 @@
-/* 3D aerial view, built with three.js r128 (loaded from a CDN in index.html).
-   World axes: X = east, Z = south. Site coordinate y maps to z = 66 - y. */
+/* Vue 3D aérienne, three.js r128 (chargé dans index.html).
+   Repère : X = est, Z = sud. La coordonnée y du plan masse devient z = 66 - y. */
 
 /* ============================================================
-   01 — 3D VIEW
-   world: X = east, Z = south (north is -Z). y_site = 66 - z
+   01 — VUE 3D
+   repère : X = est, Z = sud (le nord est en -Z). y_plan = 66 - z
    ============================================================ */
 (function(){
   var host=document.getElementById('viewer'), cv=document.getElementById('scene');
   if(!host||!cv){ return; }
 
-  /* the viewer must never sit there as a silent black rectangle */
+  /* le cadre ne doit jamais rester un rectangle noir muet */
   function fail(headline, detail){
     var n=document.createElement('div');
     n.className='vnote';
@@ -18,16 +18,16 @@
     if(window.console) console.error('[3D view] '+headline, detail||'');
   }
   if(!window.THREE){
-    fail('The 3D view could not load.',
-         'three.js is missing. Check that assets/js/vendor/three.min.js was uploaded, or open the page with an internet connection.');
+    fail('La vue 3D n\u2019a pas pu se charger.',
+         'three.js est introuvable. Vérifiez que le fichier assets/js/vendor/three.min.js a bien été mis en ligne, ou ouvrez la page avec une connexion internet.');
     return;
   }
   var renderer;
   try{
     renderer=new THREE.WebGLRenderer({canvas:cv,antialias:true});
   }catch(err){
-    fail('This browser cannot display the 3D view.',
-         'WebGL is unavailable or disabled. The plans below work in every browser.');
+    fail('Ce navigateur ne peut pas afficher la vue 3D.',
+         'WebGL est indisponible ou désactivé. Les plans ci-dessous s\u2019affichent dans tous les navigateurs.');
     return;
   }
   renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
@@ -49,7 +49,7 @@
     camera.position.set(x,y,z); camera.lookAt(target);
   }
 
-  /* lights */
+  /* éclairage */
   scene.add(new THREE.HemisphereLight(0xDDEAF2,0xA79274,0.72));
   var sun=new THREE.DirectionalLight(0xFFF3DF,0.95);
   sun.position.set(88,108,104); sun.castShadow=true;
@@ -84,9 +84,10 @@
     var c=document.createElement('canvas'); c.width=512; c.height=128;
     var g=c.getContext('2d');
     g.fillStyle=bg; g.fillRect(0,0,512,128);
-    g.fillStyle=fg; g.font='600 62px Archivo, Helvetica, Arial, sans-serif';
-    g.textAlign='center'; g.textBaseline='middle';
-    g.letterSpacing='6px';
+    g.fillStyle=fg; g.textAlign='center'; g.textBaseline='middle';
+    var size=62;                       // on réduit jusqu'à ce que le mot tienne dans l'étiquette
+    do{ g.font='600 '+size+'px Archivo, Helvetica, Arial, sans-serif'; size-=3; }
+    while(g.measureText(text).width>470 && size>26);
     g.fillText(text,256,70);
     var t=new THREE.CanvasTexture(c);
     var s=new THREE.Sprite(new THREE.SpriteMaterial({map:t,depthTest:true}));
@@ -94,7 +95,7 @@
     return s;
   }
 
-  /* ---------- ground & context ---------- */
+  /* ---------- sol et contexte ---------- */
   scene.add(slab(-120,-90,300,300,M.earth,0));
   scene.add(slab(-18,-16,14,110,M.road,0.03));      // north-south road
   scene.add(slab(-18,66,80,12,M.road,0.03));        // east-west road (south)
@@ -124,7 +125,7 @@
   scene.add(afr);
   var al=label('AFRIQUIA','#E4932B','#FFFFFF',20); al.position.set(-32,10,45); scene.add(al);
 
-  /* ---------- plot surfaces ---------- */
+  /* ---------- surfaces du terrain ---------- */
   scene.add(slab(0,0,40,66,M.earth,0.04));
   function lawnAt(x0,y0,w,h){ scene.add(slab(x0,66-(y0+h),w,h,M.lawn,0.07)); }
   lawnAt(0,8,4,50); lawnAt(14,8,3,37); lawnAt(0,0,17,1); lawnAt(39,8,1,50); lawnAt(0,64.5,40,1.5);
@@ -134,7 +135,7 @@
   function paveAt(x0,y0,w,h){ scene.add(slab(x0,66-(y0+h),w,h,M.pave,0.08)); }
   paveAt(11,45,6,13); paveAt(11,8,3,37); paveAt(0,6.5,17,1.5);
 
-  /* parking markings */
+  /* marquage au sol du parking */
   var mk=new THREE.MeshBasicMaterial({color:0xE9EAE6});
   function stripe(x0,y0,len){
     var g=new THREE.Mesh(new THREE.PlaneGeometry(len,0.14),mk);
@@ -145,7 +146,7 @@
   stripe(23,8,5); stripe(23,11.3,5); stripe(23,14.6,5);
   for(var j=0;j<=20;j++){ stripe(34,8+j*2.5,5); }
 
-  /* trees along the road */
+  /* arbres le long de la route */
   function tree(x,z,s){
     var g=new THREE.Group();
     g.add(box(0.35,2.2,0.35,M.trunk,x,0,z));
@@ -156,7 +157,7 @@
   [10,22,34,46,58].forEach(function(y){ tree(-2,66-y,1); });
   [14,30,46].forEach(function(y){ tree(39.5,66-y,0.9); });
 
-  /* ---------- building ---------- */
+  /* ---------- bâtiment ---------- */
   var BX0=4, BX1=11, BZ0=8, BZ1=58;       // z: 8 (north end) .. 58 (south end)
   var H=4.7, PAR=0.5;
   var FF_Z0=8, FF_Z1=21, GZ_Z0=21, GZ_Z1=58;   // fast food north, gaming south
@@ -164,23 +165,23 @@
   var bldg=new THREE.Group(); scene.add(bldg);
   bldg.add(slab(BX0,BZ0,7,50,M.pave,0.12));
 
-  // west, north, south solid walls (sandwich panel)
+  // murs pleins ouest, nord et sud (panneau sandwich)
   bldg.add(box(0.14,H,50,M.panelSide,BX0+0.07,0,33));
   bldg.add(box(7,H,0.14,M.panelSide,7.5,0,BZ0+0.07));
   bldg.add(box(7,H,0.14,M.panelSide,7.5,0,BZ1-0.07));
-  // blockwork base band
+  // bandeau de soubassement en agglo
   bldg.add(box(7.05,1.0,50.05,M.base,7.5,0,33,false));
-  // east glazed facade
+  // façade est vitrée
   var glass=new THREE.Mesh(new THREE.BoxGeometry(0.1,3.3,49.0),M.glass);
   glass.position.set(BX1-0.05,1.0+1.65,33); bldg.add(glass);
-  // mullions
+  // meneaux
   for(var m=0;m<=24;m++){
     bldg.add(box(0.14,3.4,0.1,M.white,BX1-0.02,1.0,BZ0+0.6+m*2.0,false));
   }
   bldg.add(box(0.22,0.25,50,M.white,BX1-0.05,4.3,33,false));
   bldg.add(box(0.22,0.25,50,M.white,BX1-0.05,0.95,33,false));
 
-  // roof + parapet
+  // toiture + acrotère
   var roof=new THREE.Group(); bldg.add(roof);
   roof.add(box(7.2,0.22,50.2,M.parapet,7.5,H,33));
   roof.add(box(0.25,PAR,50.3,M.parapet,BX0-0.02,H+0.22,33));
@@ -188,26 +189,26 @@
   roof.add(box(7.4,PAR,0.25,M.parapet,7.5,H+0.22,BZ0-0.07));
   roof.add(box(7.4,PAR,0.25,M.parapet,7.5,H+0.22,BZ1+0.07));
 
-  // sign boxes on the parapet, facing east
+  // caissons d'enseigne sur l'acrotère, tournés vers l'est
   var s1=box(0.3,1.15,6.0,M.ochre,BX1+0.2,H+0.15,14.0); roof.add(s1);
   var s2=box(0.3,1.15,8.0,M.blue,BX1+0.2,H+0.15,37.0); roof.add(s2);
 
-  // entrance doors
+  // portes d'entrée
   bldg.add(box(0.16,2.6,1.6,M.dark,BX1+0.02,0,16.0,false));
   bldg.add(box(0.16,2.6,1.8,M.dark,BX1+0.02,0,23.1,false));
-  // canopy over entrances
+  // auvents au-dessus des entrées
   bldg.add(box(1.8,0.16,3.2,M.white,BX1+0.9,3.2,16.0));
   bldg.add(box(1.8,0.16,3.4,M.white,BX1+0.9,3.2,23.1));
 
-  /* ---------- interior ---------- */
+  /* ---------- aménagement intérieur ---------- */
   var interior=new THREE.Group(); bldg.add(interior);
-  // partitions
+  // cloisons
   interior.add(box(7,3.0,0.1,M.panelSide,7.5,0,21,false));      // fast food / gaming
   interior.add(box(7,3.0,0.1,M.panelSide,7.5,0,19,false));      // sanitary block
   interior.add(box(7,3.0,0.1,M.panelSide,7.5,0,53,false));      // tournament room
   interior.add(box(7,3.0,0.1,M.panelSide,7.5,0,56,false));      // staff / store
 
-  // fast food: kitchen z 54..58, counter 52.5..54, seating 47..52.5
+  // fast food : cuisine, comptoir puis salle
   interior.add(box(6.6,1.0,0.7,M.steel,7.5,0,8.6));
   interior.add(box(0.7,1.0,3.6,M.steel,4.6,0,10.2));
   interior.add(box(6.2,1.15,0.9,M.white,7.5,0,12.8));
@@ -220,8 +221,7 @@
     interior.add(box(0.4,0.45,0.4,M.ochre,tx+0.75,0,tz,false));
   }}
 
-  // gaming: pc rows z 22..34 (site 32..44), consoles 13..22, arcade 8..13 approx
-  // PC desks along both long walls
+  // gaming : rangées de PC le long des deux longs murs
   interior.add(box(0.85,0.75,11.6,M.dark,5.0,0,30.0));
   interior.add(box(0.85,0.75,11.6,M.dark,10.0,0,30.0));
   for(var k=0;k<12;k++){
@@ -234,7 +234,7 @@
     interior.add(box(0.5,0.55,0.12,M.dark,6.1,0.5,pz,false));
     interior.add(box(0.5,0.55,0.12,M.dark,8.9,0.5,pz,false));
   }
-  // console lounge
+  // coin consoles
   for(var c2=0;c2<4;c2++){
     var cz=43.4-c2*2.1;
     interior.add(box(0.1,1.2,1.6,M.screen2,4.3,1.6,cz,false));
@@ -242,24 +242,24 @@
     interior.add(box(1.0,0.6,1.5,M.blue,5.6,0,cz,false));
     interior.add(box(1.0,0.6,1.5,M.blue,9.4,0,cz,false));
   }
-  // token arcade cabinets
+  // bornes d'arcade à jetons
   [[4.9,46.6],[4.9,48.0],[4.9,49.4],[10.1,46.6],[10.1,48.0],[10.1,49.4]].forEach(function(q){
     interior.add(box(0.95,1.9,1.05,M.ochre,q[0],0,q[1]));
     interior.add(box(0.15,0.7,0.8,M.screen,q[0]+(q[0]<7.5?0.55:-0.55),1.0,q[1],false));
   });
   interior.add(box(1.6,2.2,1.6,M.red,6.3,0,50.6));
   interior.add(box(1.6,2.2,1.6,M.blue,8.7,0,48.6));
-  // tournament desks
+  // postes de la salle de tournois
   [55.4,54.4,53.6].forEach(function(tz){
     interior.add(box(0.9,0.75,0.7,M.dark,5.4,0,tz,false));
     interior.add(box(0.9,0.75,0.7,M.dark,9.6,0,tz,false));
   });
-  // reception counter + lockers
+  // comptoir d'accueil et casiers
   interior.add(box(0.9,1.1,3.4,M.white,5.0,0,22.5));
   interior.add(box(0.95,0.1,3.45,M.blue,5.0,1.1,22.5,false));
   interior.add(box(2.2,1.9,0.5,M.panelSide,9.6,0,21.6));
 
-  /* terrace furniture */
+  /* mobilier de terrasse */
   var terr=new THREE.Group(); scene.add(terr);
   [[12.7,47],[15.2,47],[12.7,51],[15.2,51],[12.7,55],[15.2,55]].forEach(function(q){
     var x=q[0], z=66-q[1];
@@ -274,7 +274,7 @@
     });
   });
 
-  /* a few cars only */
+  /* quelques voitures seulement */
   function car(x,z,rot,col){
     var g=new THREE.Group();
     var b=box(1.75,0.75,4.3,mat(col),0,0.25,0); g.add(b);
@@ -284,13 +284,13 @@
   car(25.5,66-16,0,0xD8DAD6); car(25.5,66-30,0,0x3C4E63);
   car(36.5,66-22,0,0xBFC2BD); car(36.5,66-44,0,0x8A3F38);
 
-  /* zone labels */
+  /* étiquettes des deux zones */
   var lff=label('FAST FOOD','#C98A2E','#FFFFFF',15);
   lff.position.set(7.5,9.5,14.5); scene.add(lff);
-  var lgz=label('GAMING ZONE','#2F6E9C','#FFFFFF',18);
+  var lgz=label('ESPACE GAMING','#2F6E9C','#FFFFFF',18);
   lgz.position.set(7.5,9.5,40); scene.add(lgz);
 
-  /* ---------- controls ---------- */
+  /* ---------- navigation ---------- */
   var drag=false, lx=0, ly=0;
   function down(e){ drag=true; var p=pt(e); lx=p.x; ly=p.y; }
   function move(e){
@@ -316,7 +316,7 @@
   var roofOn=true;
   document.getElementById('btnRoof').addEventListener('click',function(){
     roofOn=!roofOn; roof.visible=roofOn;
-    this.textContent = roofOn? 'Lift the roof' : 'Put the roof back';
+    this.textContent = roofOn? 'Enlever le toit' : 'Remettre le toit';
     render();
   });
   document.getElementById('btnView').addEventListener('click',function(){
@@ -332,9 +332,9 @@
   function render(){ renderer.render(scene,camera); }
   window.addEventListener('resize',resize);
 
-  /* one orchestrated entrance: ease the camera in once */
+  /* une seule animation : la caméra se rapproche au chargement */
   try{ applyCam(); resize(); }
-  catch(err){ fail('The 3D view stopped while drawing.', String(err && err.message || err)); return; }
+  catch(err){ fail('La vue 3D s\u2019est interrompue pendant le rendu.', String(err && err.message || err)); return; }
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(!reduce){
     var start=null, d0=215, d1=CAM0.dist, dur=1400;
