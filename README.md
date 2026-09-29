@@ -42,6 +42,7 @@ index.html                 markup and section text
 assets/css/style.css       sheet layout, typography, drawing conventions
 assets/js/drawings.js      SVG site plan, floor plan, elevation, section
 assets/js/scene3d.js       three.js 3D view
+assets/js/vendor/          three.js r128 (MIT)
 ```
 
 ## Editing the drawings
@@ -59,4 +60,7 @@ Colours and line weights live in the `.dw` classes at the end of `style.css`.
 
 ## Dependency
 
-three.js r128, loaded from cdnjs. No build step, no package manager.
+three.js r128 (MIT), bundled at `assets/js/vendor/three.min.js` — the page works offline and
+needs no build step or package manager. If that file is missing, `index.html` falls back to
+the cdnjs copy. The Google Fonts link is the only other external request; without it the page
+falls back to system fonts and stays fully readable.
