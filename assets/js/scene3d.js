@@ -39,8 +39,8 @@ var MARJANE_LOGO = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfoAAAA5CAYAAA
   scene.fog=new THREE.Fog(0xBFD2DC, 280, 600);
 
   var camera=new THREE.PerspectiveCamera(38,16/9,0.5,1200);
-  var target=new THREE.Vector3(56,0,32);
-  var CAM0={az:0.30, pol:0.96, dist:152};
+  var target=new THREE.Vector3(66,0,30);
+  var CAM0={az:0.30, pol:0.96, dist:178};
   var cam={az:CAM0.az, pol:CAM0.pol, dist:CAM0.dist};
   function applyCam(){
     var x=target.x+cam.dist*Math.sin(cam.pol)*Math.sin(cam.az);
@@ -130,10 +130,12 @@ var MARJANE_LOGO = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfoAAAA5CAYAAA
   /* ---------- sol, voirie publique ---------- */
   scene.add(slab(-220,-200,560,520,M.earth,0));
   at(-20,-16,20,96,M.road,0.03);       // route publique, à l'ouest
-  at(-20,-16,150,14,M.road,0.03);      // route publique, au sud
+  at(-20,-16,190,14,M.road,0.03);      // route publique, au sud
   at(-4,-2,4,82,M.pave,0.06);          // trottoir ouest
-  at(-4,-2,134,2,M.pave,0.06);         // trottoir sud
-  at(0,0,112,62,M.earth,0.04);         // terrain
+  at(-4,-2,48,2,M.pave,0.06);          // trottoir sud, interrompu aux entrées
+  at(54,-2,42,2,M.pave,0.06);
+  at(106,-2,28,2,M.pave,0.06);
+  at(0,0,130,62,M.earth,0.04);         // terrain
   /* bandes axiales */
   var axis=new THREE.MeshBasicMaterial({color:0xE2E4DF});
   for(var ax=-14;ax<78;ax+=9){
@@ -146,14 +148,14 @@ var MARJANE_LOGO = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfoAAAA5CAYAAA
   }
 
   /* ---------- Marjane ---------- */
-  scene.add(box(12,10,48,M.ctx,104,0,36));
-  scene.add(box(13,0.7,49,M.ctxRoof,104,10,36));
-  scene.add(box(4,2.4,18,M.white,96.5,10.1,36));
-  scene.add(box(0.4,3.6,16,M.white,97.7,6.0,36));          // caisson d'enseigne
-  scene.add(box(0.5,0.4,16.2,M.mjRed,97.7,9.6,36,false));
+  scene.add(box(12,10,48,M.ctx,121.5,0,36));
+  scene.add(box(13,0.7,49,M.ctxRoof,121.5,10,36));
+  scene.add(box(4,2.4,18,M.white,114,10.1,36));
+  scene.add(box(0.4,3.6,16,M.white,115.2,6.0,36));         // caisson d'enseigne
+  scene.add(box(0.5,0.4,16.2,M.mjRed,115.2,9.6,36,false));
   var msign=logoPanel('marjane','#FFFFFF','#D2112B',14,3.0);
-  msign.position.set(97.45,7.8,36); msign.rotation.y=-Math.PI/2; scene.add(msign);
-  var ml=logo('marjane','#FFFFFF','#D2112B',26); ml.position.set(104,17,36); scene.add(ml);
+  msign.position.set(114.95,7.8,36); msign.rotation.y=-Math.PI/2; scene.add(msign);
+  var ml=logo('marjane','#FFFFFF','#D2112B',26); ml.position.set(121.5,17,36); scene.add(ml);
   /* le vrai logo remplace le texte dès qu'il est décodé */
   (function(){
     var img=new Image();
@@ -170,44 +172,55 @@ var MARJANE_LOGO = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfoAAAA5CAYAAA
     img.src=MARJANE_LOGO;
   })();
 
-  /* ---------- station gaz et lavage, ensemble, en face du bâtiment ---------- */
-  at(20,12,37,16,M.pave,0.05);
-  // station : auvent sur quatre poteaux
-  [[23,15],[23,25],[41,15],[41,25]].forEach(function(q){
+  /* ---------- station gaz et lavage, décalés à l'est ---------- */
+  at(42,10,38,20,M.pave,0.05);
+  // station Afriquia
+  [[46,13],[46,27],[64,13],[64,27]].forEach(function(q){
     scene.add(box(0.5,5.6,0.5,M.steel,q[0],0,62-q[1]));
   });
-  scene.add(box(21,0.9,13,M.white,32,5.6,62-20));          // dalle de l'auvent
-  scene.add(box(21.4,0.75,13.4,M.afBlue,32,5.25,62-20));   // bandeau bleu Afriquia
-  scene.add(box(21.5,0.22,13.5,M.afOrange,32,5.05,62-20)); // filet orange
-  scene.add(box(0.5,3.2,0.5,M.steel,23,6.5,62-15));        // mât du totem
-  scene.add(box(4.6,2.0,0.3,M.afBlue,23,8.4,62-15));
-  [[26,17],[26,23],[38,17],[38,23]].forEach(function(q){
+  scene.add(box(21,0.9,17,M.white,55,5.6,62-20));          // dalle de l'auvent
+  scene.add(box(21.4,0.75,17.4,M.afBlue,55,5.25,62-20));   // bandeau bleu Afriquia
+  scene.add(box(21.5,0.22,17.5,M.afOrange,55,5.05,62-20)); // filet orange
+  [[49,15],[49,25],[61,15],[61,25]].forEach(function(q){
     scene.add(box(2.0,1.9,1.3,M.white,q[0],0,62-q[1]));
   });
-  scene.add(box(6,3.4,2.2,M.white,23,0,62-29.2));     // boutique
-  var al=logo('AFRIQUIA','#123E8C','#FFFFFF',22); al.position.set(32,12.5,62-20); scene.add(al);
+  scene.add(box(6,3.4,2.2,M.white,46,0,62-31.2));          // boutique
+  scene.add(box(0.5,3.2,0.5,M.steel,45,6.5,62-11.5));      // mât du totem
+  scene.add(box(4.6,2.0,0.3,M.afBlue,45,8.4,62-11.5));
+  var al=logo('AFRIQUIA','#123E8C','#FFFFFF',22); al.position.set(55,12.5,62-20); scene.add(al);
   var t1=logoPanel('AFRIQUIA','#123E8C','#FFFFFF',4.4,1.9);
-  t1.position.set(23,9.4,62-14.82); scene.add(t1);
+  t1.position.set(45,9.4,62-11.32); scene.add(t1);
   var t2=logoPanel('AFRIQUIA','#123E8C','#FFFFFF',4.4,1.9);
-  t2.position.set(23,9.4,62-15.18); t2.rotation.y=Math.PI; scene.add(t2);
+  t2.position.set(45,9.4,62-11.68); t2.rotation.y=Math.PI; scene.add(t2);
 
-  // lavage : accolé à la station, côté est
-  [[44.4,12.6],[44.4,22.4],[56.6,12.6],[56.6,22.4]].forEach(function(q){
+  // lavage : une seule piste, accolée à l'est de la station
+  [[68.5,12.5],[68.5,21.5],[77.5,12.5],[77.5,21.5]].forEach(function(q){
     scene.add(box(0.35,4.2,0.35,M.steel,q[0],0,62-q[1]));
   });
-  scene.add(box(13,0.5,11,M.ctxRoof,50.5,4.2,62-17.5));
-  for(var lb=1;lb<4;lb++){ scene.add(box(0.2,2.8,10,M.panelSide,44+lb*3.2,0,62-17.5,false)); }
-  var wl=label('LAVAGE','#4E5257','#EDEEEA',16); wl.position.set(50.5,7.6,62-17.5); scene.add(wl);
+  scene.add(box(10,0.5,10,M.ctxRoof,73,4.2,62-17));
+  scene.add(box(0.2,2.8,9.2,M.panelSide,68.3,0,62-17,false));
+  scene.add(box(0.2,2.8,9.2,M.panelSide,77.7,0,62-17,false));
+  scene.add(box(9.6,2.8,0.2,M.panelSide,73,0,62-21.6,false));
+  var wl=label('LAVAGE','#4E5257','#EDEEEA',15); wl.position.set(73,7.6,62-17); scene.add(wl);
+
+  /* ---------- maisons voisines, entre la route et la station ---------- */
+  [[11,14,14,12,6.5],[11,32,14,12,7.0],[12,50,16,12,6.0]].forEach(function(h){
+    scene.add(box(h[2],h[4],h[3],M.ctx,h[0],0,62-h[1]));
+    scene.add(box(h[2]+0.8,0.6,h[3]+0.8,M.ctxRoof,h[0],h[4],62-h[1]));
+    scene.add(box(1.2,2.2,0.16,M.dark,h[0]+h[2]/2-2,0,62-h[1]+h[3]/2+0.05,false));
+  });
 
   /* ---------- voies, allées et parking ---------- */
   at(0,0,96,6,M.asphalt,0.06);       // voie d'entrée, au sud
-  at(0,34,20,6,M.asphalt,0.06);      // voie de sortie, à l'ouest
-  at(0,0,18,62,M.asphalt,0.06);      // dégagement ouest, le long de la route
-  at(18,6,78,6,M.asphalt,0.06);      // allée sud
-  at(12,28,84,6,M.asphalt,0.06);     // allée nord
-  at(-20,52,170,10,M.road,0.06);     // route derrière le bâtiment
-  at(79,4,18,46,M.asphalt,0.06);     // parking principal, entre le bâtiment et Marjane
-  at(-20,50,170,2,M.pave,0.07);      // trottoir le long de la route arrière
+  at(34,6,80,4,M.asphalt,0.06);      // allée sud
+  at(34,30,80,4,M.asphalt,0.06);     // allée nord
+  at(34,50,80,2,M.pave,0.07);        // trottoir derrière le bâtiment
+  /* la route contourne le terrain : arrière, puis descente vers la route sud */
+  at(-20,52,190,10,M.road,0.055);    // route arrière, aller et retour
+  at(24,-16,10,68,M.road,0.055);     // branche nord-sud, entre les maisons et la station
+  at(20,-16,4,68,M.pave,0.065);      // trottoir côté maisons
+  at(34,0,2,52,M.pave,0.065);        // trottoir côté station
+  at(79,4,35,46,M.asphalt,0.06);     // parking doublé, entre le bâtiment et Marjane
 
   /* marquage au sol */
   var mk=new THREE.MeshBasicMaterial({color:0xE9EAE6});
@@ -219,17 +232,52 @@ var MARJANE_LOGO = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfoAAAA5CAYAAA
     var g=new THREE.Mesh(new THREE.PlaneGeometry(x1-x0,0.14),mk);
     g.rotation.x=-Math.PI/2; g.position.set((x0+x1)/2,0.1,62-y); scene.add(g);
   }
-  // parking principal : deux rangées face à Marjane
-  [[79.5,84.5],[91,96]].forEach(function(r){
-    for(var i=0;i<=16;i++){ sepH(7+i*2.5,r[0],r[1]); }
-    sepV(r[0],7,40); sepV(r[1],7,40);
+  [[79,84],[90.5,95.5],[97,102],[108.5,113.5]].forEach(function(r){
+    for(var i=0;i<=17;i++){ sepH(6+i*2.5,r[0],r[1]); }
+    sepV(r[0],6,42.5); sepV(r[1],6,42.5);
   });
-  // bande axiale de la route arrière
+  // bandes axiales des deux nouvelles voies
   var axis2=new THREE.MeshBasicMaterial({color:0xE2E4DF});
-  for(var ax2=-16;ax2<146;ax2+=9){
+  for(var ax2=-16;ax2<148;ax2+=9){
     var g2=new THREE.Mesh(new THREE.PlaneGeometry(4.5,0.2),axis2);
     g2.rotation.x=-Math.PI/2; g2.position.set(ax2,0.14,62-57); scene.add(g2);
   }
+  for(var ay=-14;ay<52;ay+=9){
+    var g3=new THREE.Mesh(new THREE.PlaneGeometry(0.2,4.5),axis2);
+    g3.rotation.x=-Math.PI/2; g3.position.set(29,0.14,62-ay); scene.add(g3);
+  }
+
+  /* deux entrées depuis la route sud : une pour la station, une pour Marjane */
+  function groundText(txt,x,y,w,h){
+    var c=document.createElement('canvas'); c.width=1024; c.height=256;
+    var g=c.getContext('2d');
+    g.clearRect(0,0,1024,256);
+    g.fillStyle='#E9EAE6'; g.textAlign='center'; g.textBaseline='middle';
+    g.font='700 150px Archivo, Helvetica, Arial, sans-serif';
+    g.fillText(txt,512,140);
+    var m2=new THREE.Mesh(new THREE.PlaneGeometry(w,h),
+      new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(c),transparent:true}));
+    m2.rotation.x=-Math.PI/2; m2.position.set(x,0.12,62-y); scene.add(m2);
+    return m2;
+  }
+  [[49,'ENTRÉE'],[101,'ENTRÉE']].forEach(function(e){
+    at(e[0]-5,-2,10,8,M.asphalt,0.06);                 // bateau d'entrée
+    groundText(e[1],e[0],2.8,8,2.6);
+    var le=label(e[1],'#5A6066','#FFFFFF',11);
+    le.position.set(e[0],5.5,62-2.6); scene.add(le);
+  });
+
+  // marquage PARKING au sol, dans l'allée centrale
+  var pk=document.createElement('canvas'); pk.width=1024; pk.height=256;
+  var pg=pk.getContext('2d');
+  pg.clearRect(0,0,1024,256);
+  pg.fillStyle='#E9EAE6'; pg.textAlign='center'; pg.textBaseline='middle';
+  pg.font='700 150px Archivo, Helvetica, Arial, sans-serif';
+  pg.fillText('PARKING',512,140);
+  var pm=new THREE.Mesh(new THREE.PlaneGeometry(4.5,18),
+    new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(pk),transparent:true}));
+  pm.rotation.x=-Math.PI/2; pm.rotation.z=-Math.PI/2;
+  pm.position.set(87.25,0.12,62-27); scene.add(pm);
 
   /* arbres */
   function tree(x,y,s){
@@ -237,110 +285,105 @@ var MARJANE_LOGO = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfoAAAA5CAYAAA
     var c=new THREE.Mesh(new THREE.SphereGeometry(1.6*s,10,8),M.leaf);
     c.position.set(x,3.4*s,62-y); c.castShadow=true; scene.add(c);
   }
-  [22,34,46,58,70].forEach(function(x){ tree(x,31,0.85); });
-  [10,18,26].forEach(function(y){ tree(59,y,0.8); });
-  [10,20,30,40].forEach(function(y){ tree(77.5,y,0.8); });
+  [50,58,66,74].forEach(function(x){ tree(x,32.4,0.85); });
+  [10,20,30,40].forEach(function(y){ tree(77.8,y,0.8); });
+  [12,24,36].forEach(function(y){ tree(96.2,y,0.75); });
 
-  /* ---------- bâtiment ---------- */
-  var BZ0=4, BZ1=11, H=4.7, PAR=0.5;
-  var bldg=new THREE.Group(); bldg.position.set(-8,0,8); scene.add(bldg);
-  bldg.add(slab(36,BZ0,50,7,M.pave,0.12));
+  /* ---------- bâtiment 8 x 30 = 240 m² ----------
+     repère local : x 0..30 d'ouest en est, z 0..8 du nord au sud,
+     façade vitrée en z=8. Gaming x 0..22, fast food x 22..30. */
+  var H=4.7, PAR=0.5, BW=8, BL=30;
+  var bldg=new THREE.Group(); bldg.position.set(48,0,12); scene.add(bldg);
+  bldg.add(slab(0,0,BL,BW,M.pave,0.12));
 
-  // murs pleins : nord (z=4) et les deux pignons
-  bldg.add(box(50,H,0.14,M.panelSide,61,0,BZ0+0.07));
-  bldg.add(box(0.14,H,7,M.panelSide,36.07,0,7.5));
-  bldg.add(box(0.14,H,7,M.panelSide,85.93,0,7.5));
-  // bandeau de soubassement
-  bldg.add(box(50.05,1.0,7.05,M.base,61,0,7.5,false));
-  // façade sud vitrée
-  var glass=new THREE.Mesh(new THREE.BoxGeometry(49.0,3.3,0.1),M.glass);
-  glass.position.set(61,2.65,BZ1-0.05); bldg.add(glass);
-  for(var m=0;m<=24;m++){
-    bldg.add(box(0.1,3.4,0.14,M.white,85.4-m*2.0,1.0,BZ1-0.02,false));
-  }
-  bldg.add(box(50,0.25,0.22,M.white,61,4.3,BZ1-0.05,false));
-  bldg.add(box(50,0.25,0.22,M.white,61,0.95,BZ1-0.05,false));
+  bldg.add(box(BL,H,0.14,M.panelSide,BL/2,0,0.07));        // mur nord
+  bldg.add(box(0.14,H,BW,M.panelSide,0.07,0,BW/2));        // pignon ouest
+  bldg.add(box(0.14,H,BW,M.panelSide,BL-0.07,0,BW/2));     // pignon est
+  bldg.add(box(BL+0.05,1.0,BW+0.05,M.base,BL/2,0,BW/2,false));
+  var glass=new THREE.Mesh(new THREE.BoxGeometry(BL-1,3.3,0.1),M.glass);
+  glass.position.set(BL/2,2.65,BW-0.05); bldg.add(glass);
+  for(var m=0;m<=14;m++){ bldg.add(box(0.1,3.4,0.14,M.white,0.6+m*2.0,1.0,BW-0.02,false)); }
+  bldg.add(box(BL,0.25,0.22,M.white,BL/2,4.3,BW-0.05,false));
+  bldg.add(box(BL,0.25,0.22,M.white,BL/2,0.95,BW-0.05,false));
 
-  // toiture + acrotère
   var roof=new THREE.Group(); bldg.add(roof);
-  roof.add(box(50.2,0.22,7.2,M.parapet,61,H,7.5));
-  roof.add(box(50.3,PAR,0.25,M.parapet,61,H+0.22,BZ0-0.02));
-  roof.add(box(50.3,PAR,0.25,M.parapet,61,H+0.22,BZ1+0.02));
-  roof.add(box(0.25,PAR,7.4,M.parapet,35.93,H+0.22,7.5));
-  roof.add(box(0.25,PAR,7.4,M.parapet,86.07,H+0.22,7.5));
-  // caissons d'enseigne sur l'acrotère, tournés vers le sud
-  roof.add(box(6.0,1.15,0.3,M.ochre,80,H+0.15,BZ1+0.2));
-  roof.add(box(8.0,1.15,0.3,M.blue,57,H+0.15,BZ1+0.2));
+  roof.add(box(BL+0.2,0.22,BW+0.2,M.parapet,BL/2,H,BW/2));
+  roof.add(box(BL+0.3,PAR,0.25,M.parapet,BL/2,H+0.22,-0.02));
+  roof.add(box(BL+0.3,PAR,0.25,M.parapet,BL/2,H+0.22,BW+0.02));
+  roof.add(box(0.25,PAR,BW+0.4,M.parapet,-0.02,H+0.22,BW/2));
+  roof.add(box(0.25,PAR,BW+0.4,M.parapet,BL+0.02,H+0.22,BW/2));
+  roof.add(box(7.0,1.15,0.3,M.blue,13,H+0.15,BW+0.2));     // enseigne gaming
+  roof.add(box(5.0,1.15,0.3,M.ochre,26,H+0.15,BW+0.2));    // enseigne fast food
 
-  // portes d'entrée + auvents
-  bldg.add(box(1.6,2.6,0.16,M.dark,78,0,BZ1+0.02,false));
-  bldg.add(box(1.8,2.6,0.16,M.dark,70.9,0,BZ1+0.02,false));
-  bldg.add(box(3.2,0.16,1.8,M.white,78,3.2,BZ1+0.9));
-  bldg.add(box(3.4,0.16,1.8,M.white,70.9,3.2,BZ1+0.9));
+  bldg.add(box(1.8,2.6,0.16,M.dark,21,0,BW+0.02,false));   // entrée gaming
+  bldg.add(box(1.6,2.6,0.16,M.dark,25.5,0,BW+0.02,false)); // entrée fast food
+  bldg.add(box(3.4,0.16,1.8,M.white,21,3.2,BW+0.9));
+  bldg.add(box(3.2,0.16,1.8,M.white,25.5,3.2,BW+0.9));
 
   /* ---------- aménagement intérieur ---------- */
-  var interior=new THREE.Group(); bldg.add(interior);
-  // cloisons
-  interior.add(box(0.1,3.0,7,M.panelSide,73,0,7.5,false));   // gaming / fast food
-  interior.add(box(0.1,3.0,7,M.panelSide,75,0,7.5,false));   // bloc sanitaire
-  interior.add(box(0.1,3.0,7,M.panelSide,41,0,7.5,false));   // salle de tournois
-  interior.add(box(0.1,3.0,7,M.panelSide,38,0,7.5,false));   // personnel / stock
+  var it=new THREE.Group(); bldg.add(it);
+  [2,5,10,14,20,22,24].forEach(function(x){
+    it.add(box(0.1,3.0,BW,M.panelSide,x,0,BW/2,false));
+  });
 
-  // fast food : cuisine, comptoir, salle
-  interior.add(box(0.7,1.0,6.6,M.steel,85.4,0,7.5));
-  interior.add(box(3.6,1.0,0.7,M.steel,83.8,0,4.6));
-  interior.add(box(0.9,1.15,6.2,M.white,81.2,0,7.5));
-  interior.add(box(0.95,0.1,6.2,M.ochre,81.2,1.15,7.5,false));
-  for(var a=0;a<4;a++){ for(var b=0;b<2;b++){
-    var tx=76.2+a*1.45, tz=5.2+b*3.2;
-    var t=new THREE.Mesh(new THREE.CylinderGeometry(0.42,0.42,0.75,12),M.white);
-    t.position.set(tx,0.38,tz); t.castShadow=true; interior.add(t);
-    interior.add(box(0.4,0.45,0.4,M.ochre,tx,0,tz-0.75,false));
-    interior.add(box(0.4,0.45,0.4,M.ochre,tx,0,tz+0.75,false));
-  }}
-
-  // gaming : deux rangées de PC le long des murs
-  interior.add(box(11.6,0.75,0.85,M.dark,64,0,5.0));
-  interior.add(box(11.6,0.75,0.85,M.dark,64,0,10.0));
-  for(var k=0;k<12;k++){
-    var px=58.7+k*1.0;
-    interior.add(box(0.72,0.42,0.06,M.screen,px,0.78,5.3,false));
-    interior.add(box(0.72,0.42,0.06,M.screen,px,0.78,9.7,false));
-    interior.add(box(0.5,0.5,0.5,M.red,px,0,6.1,false));
-    interior.add(box(0.5,0.5,0.5,M.red,px,0,8.9,false));
-    interior.add(box(0.12,0.55,0.5,M.dark,px,0.5,6.1,false));
-    interior.add(box(0.12,0.55,0.5,M.dark,px,0.5,8.9,false));
-  }
-  // coin consoles
+  // personnel / stock  x 0..2 ; tournois x 2..5
+  [3.0,3.9].forEach(function(x){
+    it.add(box(0.7,0.75,0.9,M.dark,x,0,1.6,false));
+    it.add(box(0.7,0.75,0.9,M.dark,x,0,6.4,false));
+  });
+  // arcade à jetons x 5..10
+  [[5.9,1.0],[7.3,1.0],[8.7,1.0],[5.9,7.0],[7.3,7.0],[8.7,7.0]].forEach(function(q){
+    it.add(box(0.95,1.9,1.05,M.ochre,q[0],0,q[1]));
+    it.add(box(0.8,0.7,0.15,M.screen,q[0],1.0,q[1]+(q[1]<4?0.6:-0.6),false));
+  });
+  it.add(box(1.6,2.2,1.6,M.red,6.6,0,4.0));
+  it.add(box(1.6,2.2,1.6,M.blue,8.8,0,4.0));
+  // consoles x 10..14
   for(var c2=0;c2<4;c2++){
-    var cx=50.6+c2*2.1;
-    interior.add(box(1.6,1.2,0.1,M.screen2,cx,1.6,4.3,false));
-    interior.add(box(1.6,1.2,0.1,M.screen2,cx,1.6,10.7,false));
-    interior.add(box(1.5,0.6,1.0,M.blue,cx,0,5.6,false));
-    interior.add(box(1.5,0.6,1.0,M.blue,cx,0,9.4,false));
+    var cx=10.9+c2*0.95;
+    it.add(box(1.6,1.2,0.1,M.screen2,10.9+c2*0.95,1.6,0.3,false));
   }
-  // bornes d'arcade à jetons
-  [[47.4,4.9],[46.0,4.9],[44.6,4.9],[47.4,10.1],[46.0,10.1],[44.6,10.1]].forEach(function(q){
-    interior.add(box(1.05,1.9,0.95,M.ochre,q[0],0,q[1]));
-    interior.add(box(0.8,0.7,0.15,M.screen,q[0],1.0,q[1]+(q[1]<7.5?0.55:-0.55),false));
+  [[11.2],[13.0]].forEach(function(q){
+    it.add(box(1.5,1.2,0.1,M.screen2,q[0],1.6,0.3,false));
+    it.add(box(1.5,1.2,0.1,M.screen2,q[0],1.6,7.7,false));
+    it.add(box(1.5,0.6,1.0,M.blue,q[0],0,1.6,false));
+    it.add(box(1.5,0.6,1.0,M.blue,q[0],0,6.4,false));
   });
-  interior.add(box(1.6,2.2,1.6,M.red,43.4,0,6.3));
-  interior.add(box(1.6,2.2,1.6,M.blue,45.4,0,8.7));
-  // postes de la salle de tournois
-  [38.6,39.6,40.4].forEach(function(tx2){
-    interior.add(box(0.7,0.75,0.9,M.dark,tx2,0,5.4,false));
-    interior.add(box(0.7,0.75,0.9,M.dark,tx2,0,9.6,false));
-  });
-  // comptoir d'accueil et casiers
-  interior.add(box(3.4,1.1,0.9,M.white,71.5,0,5.0));
-  interior.add(box(3.45,0.1,0.95,M.blue,71.5,1.1,5.0,false));
-  interior.add(box(0.5,1.9,2.2,M.panelSide,72.4,0,9.6));
+  // pc gaming x 14..20 : deux rangées de 6
+  it.add(box(5.6,0.75,0.85,M.dark,17,0,0.9));
+  it.add(box(5.6,0.75,0.85,M.dark,17,0,7.1));
+  for(var k=0;k<6;k++){
+    var px=14.7+k*0.95;
+    it.add(box(0.72,0.42,0.06,M.screen,px,0.78,1.2,false));
+    it.add(box(0.72,0.42,0.06,M.screen,px,0.78,6.8,false));
+    it.add(box(0.5,0.5,0.5,M.red,px,0,2.0,false));
+    it.add(box(0.5,0.5,0.5,M.red,px,0,6.0,false));
+    it.add(box(0.5,0.55,0.12,M.dark,px,0.5,2.0,false));
+    it.add(box(0.5,0.55,0.12,M.dark,px,0.5,6.0,false));
+  }
+  // accueil et jetons x 20..22
+  it.add(box(1.6,1.1,0.9,M.white,21,0,1.2));
+  it.add(box(1.65,0.1,0.95,M.blue,21,1.1,1.2,false));
+  it.add(box(1.6,1.9,0.5,M.panelSide,21,0,7.3));
+  // sanitaires x 22..24 ; salle x 24..27
+  for(var a=0;a<3;a++){ for(var b2=0;b2<2;b2++){
+    var tx=24.6+a*0.85, tz=2.4+b2*3.0;
+    var t=new THREE.Mesh(new THREE.CylinderGeometry(0.42,0.42,0.75,12),M.white);
+    t.position.set(tx,0.38,tz); t.castShadow=true; it.add(t);
+    it.add(box(0.4,0.45,0.4,M.ochre,tx,0,tz-0.75,false));
+    it.add(box(0.4,0.45,0.4,M.ochre,tx,0,tz+0.75,false));
+  }}
+  // comptoir x 27..28 ; cuisine x 28..30
+  it.add(box(0.9,1.15,6.4,M.white,27.5,0,BW/2));
+  it.add(box(0.95,0.1,6.4,M.ochre,27.5,1.15,BW/2,false));
+  it.add(box(0.7,1.0,7.0,M.steel,29.4,0,BW/2));
+  it.add(box(1.6,1.0,0.7,M.steel,28.8,0,0.6));
 
   /* ---------- terrasse, cheminement, pelouse ---------- */
-  at(28,41,50,2,M.pave,0.08);
-  at(65,34,13,7,M.pave,0.08);
-  at(28,34,37,7,M.lawn,0.08);
-  [[67.2,35.8],[67.2,39.2],[71.5,35.8],[71.5,39.2],[75.8,35.8],[75.8,39.2]].forEach(function(q){
+  at(48,40,30,2,M.pave,0.08);
+  at(70,34,8,6,M.pave,0.08);
+  at(48,34,22,6,M.lawn,0.08);
+  [[72,35.6],[75.6,35.6],[72,38.4],[75.6,38.4]].forEach(function(q){
     var x=q[0], z=62-q[1];
     var t=new THREE.Mesh(new THREE.CylinderGeometry(0.55,0.55,0.75,14),M.white);
     t.position.set(x,0.38,z); t.castShadow=true; scene.add(t);
@@ -354,20 +397,15 @@ var MARJANE_LOGO = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfoAAAA5CAYAAA
   });
 
   /* quelques voitures seulement */
-  function car(x,y,col){            // stationnement face nord-sud
-    var g=new THREE.Group();
-    g.add(box(1.75,0.75,4.3,mat(col),0,0.25,0));
-    g.add(box(1.55,0.6,2.1,mat(0x2B3136),0,1.0,0.2,false));
-    g.position.set(x,0,62-y); scene.add(g);
-  }
   function carE(x,y,col){
     var g=new THREE.Group();
     g.add(box(4.3,0.75,1.75,mat(col),0,0.25,0));
     g.add(box(2.1,0.6,1.55,mat(0x2B3136),0.2,1.0,0,false));
     g.position.set(x,0,62-y); scene.add(g);
   }
-  carE(82,15.25,0xD8DAD6); carE(82,30.25,0x3C4E63);
-  carE(93.5,20.25,0x8A3F38); carE(93.5,37.75,0xBFC2BD);
+  carE(81.5,14.25,0xD8DAD6); carE(81.5,31.75,0x3C4E63);
+  carE(93,19.25,0x8A3F38);   carE(93,36.75,0xBFC2BD);
+  carE(99.5,24.25,0xC3C6C1); carE(111,29.25,0x4A6A80);
 
   /* voitures qui passent sur la route publique */
   var traffic=[];
@@ -389,8 +427,10 @@ var MARJANE_LOGO = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfoAAAA5CAYAAA
   roadCar(0xC3C6C1,'x',20,-9,1,12);
   roadCar(0x4A6A80,'x',86,-3,-1,10);
   roadCar(0xD8DAD6,'x',52,-3,-1,13);
-  roadCar(0x8A3F38,'x',30,54.5,1,11);
-  roadCar(0xBFC2BD,'x',96,59.5,-1,12);
+  roadCar(0xBFC2BD,'x',120,59.5,-1,12);
+  roadCar(0x4A6A80,'z',26.5,20,1,10);
+  roadCar(0xD2D5D0,'z',31.5,40,-1,11);
+
   function moveTraffic(dt){
     for(var i=0;i<traffic.length;i++){
       var c=traffic[i], p=c.g.position;
@@ -404,11 +444,84 @@ var MARJANE_LOGO = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfoAAAA5CAYAAA
     }
   }
 
+  /* un seul poteau électrique, à l'angle nord-ouest du terrain */
+  (function(){
+    var px=39.5, py=44;
+    var dark=mat(0x14181B);
+    var shaft=new THREE.Mesh(new THREE.CylinderGeometry(0.16,0.28,9.4,8),dark);
+    shaft.position.set(px,4.7,62-py); shaft.castShadow=true; scene.add(shaft);
+    scene.add(box(2.4,0.16,0.16,dark,px,8.5,62-py));
+    scene.add(box(1.6,0.12,0.12,dark,px,7.4,62-py));
+    [-1.0,1.0].forEach(function(d){
+      var ins=new THREE.Mesh(new THREE.CylinderGeometry(0.11,0.11,0.34,6),M.white);
+      ins.position.set(px+d,8.8,62-py); scene.add(ins);
+    });
+  })();
+
+  /* une voiture dans la piste de lavage */
+  (function(){
+    var g=new THREE.Group();
+    g.add(box(1.75,0.72,4.3,mat(0x2E6DA4),0,0.28,0));
+    g.add(box(1.55,0.6,2.1,mat(0x2B3136),0,1.0,-0.2,false));
+    g.position.set(73,0,62-17.5); scene.add(g);
+    // eau au sol
+    var wsh=new THREE.Mesh(new THREE.PlaneGeometry(4.6,6.4),
+      new THREE.MeshBasicMaterial({color:0x7FA8BE,transparent:true,opacity:0.45}));
+    wsh.rotation.x=-Math.PI/2; wsh.position.set(73,0.11,62-17.5); scene.add(wsh);
+  })();
+
+  /* silhouettes : clients et passants, qui marchent */
+  var skin=mat(0xC49A6C), legs=mat(0x39414A), walkers=[], tnow=0;
+  function walker(ax,ay,bx,by,col,sp){
+    var g=new THREE.Group();
+    var lg=box(0.38,0.82,0.26,legs,0,0,0);
+    var to=box(0.46,0.62,0.28,mat(col),0,0.82,0);
+    var hd=new THREE.Mesh(new THREE.SphereGeometry(0.135,10,8),skin);
+    hd.position.set(0,1.58,0);
+    g.add(lg); g.add(to); g.add(hd);
+    g.traverse(function(o){ if(o.isMesh) o.castShadow=true; });
+    scene.add(g);
+    walkers.push({g:g,ax:ax,ay:ay,bx:bx,by:by,sp:sp||1.1,
+                  t:Math.random(),dir:Math.random()<0.5?1:-1,ph:Math.random()*6.283});
+  }
+  function moveWalkers(dt){
+    tnow+=dt;
+    for(var i=0;i<walkers.length;i++){
+      var w=walkers[i];
+      var dx=w.bx-w.ax, dy=w.by-w.ay, len=Math.sqrt(dx*dx+dy*dy)||1;
+      w.t += w.dir*(w.sp/len)*dt;
+      if(w.t>1){ w.t=1; w.dir=-1; }
+      if(w.t<0){ w.t=0; w.dir=1; }
+      var x=w.ax+dx*w.t, y=w.ay+dy*w.t;
+      w.g.position.set(x, Math.abs(Math.sin(tnow*5+w.ph))*0.035, 62-y);
+      w.g.rotation.y=Math.atan2(dx*w.dir, -dy*w.dir);
+    }
+  }
+  // sortie de Marjane vers le parking
+  walker(112.5,20.5, 99.0,20.5, 0xC0392B, 1.2);
+  walker(111.5,26.0, 97.5,29.0, 0x2E4A7D, 1.0);
+  walker(113.0,30.5, 103.0,34.0, 0xE0E2DE, 1.15);
+  walker(109.5,23.0, 109.5,34.0, 0x3E7A53, 0.9);
+  walker(110.5,17.0, 101.0,15.0, 0x8E5A9E, 1.05);
+  // terrasse et entrée du fast food
+  walker(71.0,36.0, 76.5,39.5, 0xD9A441, 0.7);
+  walker(73.6,41.4, 80.0,30.0, 0xB05C3B, 1.1);
+  walker(70.0,36.5, 73.0,39.0, 0x35586E, 0.65);
+  // entrée de la salle de gaming
+  walker(69.2,41.4, 82.0,26.0, 0x2F6E9C, 1.15);
+  walker(67.5,40.8, 71.0,40.8, 0x4A4E8C, 0.8);
+  // parking et allées
+  walker(86.5,14.0, 86.5,34.0, 0x5A6066, 1.25);
+  walker(95.5,34.0, 95.5,14.0, 0x7B8A93, 1.1);
+  walker(50.0,8.0, 50.0,28.0, 0xA8563F, 1.0);
+
   /* étiquettes des deux zones */
   var lff=label('FAST FOOD','#C98A2E','#FFFFFF',15);
-  lff.position.set(71.5,9.5,15.5); scene.add(lff);
+  lff.position.set(74,9.5,16); scene.add(lff);
+  var lpk=label('PARKING','#5A6066','#FFFFFF',13);
+  lpk.position.set(96.5,7,62-27); scene.add(lpk);
   var lgz=label('ESPACE GAMING','#2F6E9C','#FFFFFF',18);
-  lgz.position.set(46,9.5,15.5); scene.add(lgz);
+  lgz.position.set(61,9.5,16); scene.add(lgz);
 
   /* ---------- navigation ---------- */
   var drag=false, lx=0, ly=0;
@@ -462,7 +575,7 @@ var MARJANE_LOGO = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfoAAAA5CAYAAA
   (function loop(){
     requestAnimationFrame(loop);
     var dt=Math.min(clock.getDelta(),0.1);
-    if(!reduce) moveTraffic(dt);
+    if(!reduce){ moveTraffic(dt); moveWalkers(dt); }
     if(intro<1){
       intro=Math.min(1,intro+dt/1.4);
       var e=1-Math.pow(1-intro,3);
