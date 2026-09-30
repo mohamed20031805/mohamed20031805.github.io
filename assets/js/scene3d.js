@@ -62,7 +62,8 @@
     panelSide:mat(0xE2E5E1), base:mat(0xB9BCB7), parapet:mat(0xD8DBD6),
     ctx:mat(0xBFC2BD), ctxRoof:mat(0xA9ADA8), road:mat(0x4E5257), trunk:mat(0x6B5640),
     leaf:mat(0x59763F), white:mat(0xFFFFFF), dark:mat(0x2B3136), ochre:mat(0xC98A2E),
-    blue:mat(0x2F6E9C), red:mat(0xB4483C), steel:mat(0x8D959B)
+    blue:mat(0x2F6E9C), red:mat(0xB4483C), steel:mat(0x8D959B),
+    afBlue:mat(0x123E8C), afOrange:mat(0xF07D00), mjRed:mat(0xD2112B)
   };
   M.glass=new THREE.MeshPhongMaterial({color:0x8FB6CB,transparent:true,opacity:0.42,shininess:90,side:THREE.DoubleSide});
   M.screen=new THREE.MeshBasicMaterial({color:0x6FD0E8});
@@ -82,6 +83,33 @@
   /* aires données en coordonnées du plan masse (x, y au nord) */
   function at(x0,y0,w,h,m,el){ scene.add(slab(x0,62-(y0+h),w,h,m,el)); }
 
+  function logo(text,bg,fg,scale,italic){
+    var c=document.createElement('canvas'); c.width=512; c.height=128;
+    var g=c.getContext('2d');
+    g.fillStyle=bg; g.fillRect(0,0,512,128);
+    g.fillStyle=fg; g.textAlign='center'; g.textBaseline='middle';
+    var size=76;
+    do{ g.font=(italic?'italic ':'')+'700 '+size+'px Archivo, Helvetica, Arial, sans-serif'; size-=3; }
+    while(g.measureText(text).width>460 && size>28);
+    g.fillText(text,256,68);
+    var t=new THREE.CanvasTexture(c);
+    var sp=new THREE.Sprite(new THREE.SpriteMaterial({map:t,depthTest:true}));
+    sp.scale.set(scale||18,(scale||18)/4,1);
+    return sp;
+  }
+  function logoPanel(text,bg,fg,w,h,italic){
+    var c=document.createElement('canvas'); c.width=512; c.height=128;
+    var g=c.getContext('2d');
+    g.fillStyle=bg; g.fillRect(0,0,512,128);
+    g.fillStyle=fg; g.textAlign='center'; g.textBaseline='middle';
+    var size=86;
+    do{ g.font=(italic?'italic ':'')+'700 '+size+'px Archivo, Helvetica, Arial, sans-serif'; size-=3; }
+    while(g.measureText(text).width>460 && size>28);
+    g.fillText(text,256,68);
+    var t=new THREE.CanvasTexture(c);
+    return new THREE.Mesh(new THREE.PlaneGeometry(w,h),
+      new THREE.MeshBasicMaterial({map:t}));
+  }
   function label(text,bg,fg,scale){
     var c=document.createElement('canvas'); c.width=512; c.height=128;
     var g=c.getContext('2d');
@@ -119,7 +147,11 @@
   scene.add(box(12,10,54,M.ctx,102,0,31));
   scene.add(box(13,0.7,55,M.ctxRoof,102,10,31));
   scene.add(box(4,2.4,18,M.white,94.5,10.1,31));
-  var ml=label('MARJANE','#E9EBE6','#2B3136',26); ml.position.set(102,16,31); scene.add(ml);
+  scene.add(box(0.4,3.6,16,M.white,95.7,6.0,31));          // caisson d'enseigne
+  scene.add(box(0.5,0.4,16.2,M.mjRed,95.7,9.6,31,false));
+  var msign=logoPanel('marjane','#FFFFFF','#D2112B',14,3.0);
+  msign.position.set(95.45,7.8,31); msign.rotation.y=-Math.PI/2; scene.add(msign);
+  var ml=logo('marjane','#FFFFFF','#D2112B',26); ml.position.set(102,17,31); scene.add(ml);
 
   /* ---------- station gaz et lavage, ensemble, en face du bâtiment ---------- */
   at(20,12,37,16,M.pave,0.05);
@@ -127,13 +159,20 @@
   [[23,15],[23,25],[41,15],[41,25]].forEach(function(q){
     scene.add(box(0.5,5.6,0.5,M.steel,q[0],0,62-q[1]));
   });
-  scene.add(box(21,0.9,13,M.white,32,5.6,62-20));
-  scene.add(box(21.3,0.5,13.3,M.ochre,32,5.4,62-20));
+  scene.add(box(21,0.9,13,M.white,32,5.6,62-20));          // dalle de l'auvent
+  scene.add(box(21.4,0.75,13.4,M.afBlue,32,5.25,62-20));   // bandeau bleu Afriquia
+  scene.add(box(21.5,0.22,13.5,M.afOrange,32,5.05,62-20)); // filet orange
+  scene.add(box(0.5,3.2,0.5,M.steel,23,6.5,62-15));        // mât du totem
+  scene.add(box(4.6,2.0,0.3,M.afBlue,23,8.4,62-15));
   [[26,17],[26,23],[38,17],[38,23]].forEach(function(q){
     scene.add(box(2.0,1.9,1.3,M.white,q[0],0,62-q[1]));
   });
   scene.add(box(6,3.4,2.2,M.white,23,0,62-29.2));     // boutique
-  var al=label('STATION','#E4932B','#FFFFFF',20); al.position.set(32,11,62-20); scene.add(al);
+  var al=logo('AFRIQUIA','#123E8C','#FFFFFF',22); al.position.set(32,12.5,62-20); scene.add(al);
+  var t1=logoPanel('AFRIQUIA','#123E8C','#FFFFFF',4.4,1.9);
+  t1.position.set(23,9.4,62-14.82); scene.add(t1);
+  var t2=logoPanel('AFRIQUIA','#123E8C','#FFFFFF',4.4,1.9);
+  t2.position.set(23,9.4,62-15.18); t2.rotation.y=Math.PI; scene.add(t2);
 
   // lavage : accolé à la station, côté est
   [[44.4,12.6],[44.4,22.4],[56.6,12.6],[56.6,22.4]].forEach(function(q){
