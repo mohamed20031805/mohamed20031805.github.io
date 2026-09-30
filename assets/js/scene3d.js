@@ -37,7 +37,7 @@
   scene.fog=new THREE.Fog(0xBFD2DC, 280, 600);
 
   var camera=new THREE.PerspectiveCamera(38,16/9,0.5,1200);
-  var target=new THREE.Vector3(50,0,34);
+  var target=new THREE.Vector3(56,0,32);
   var CAM0={az:0.30, pol:0.96, dist:152};
   var cam={az:CAM0.az, pol:CAM0.pol, dist:CAM0.dist};
   function applyCam(){
@@ -131,7 +131,7 @@
   at(-20,-16,150,14,M.road,0.03);      // route publique, au sud
   at(-4,-2,4,82,M.pave,0.06);          // trottoir ouest
   at(-4,-2,134,2,M.pave,0.06);         // trottoir sud
-  at(0,0,108,62,M.earth,0.04);         // terrain
+  at(0,0,112,62,M.earth,0.04);         // terrain
   /* bandes axiales */
   var axis=new THREE.MeshBasicMaterial({color:0xE2E4DF});
   for(var ax=-14;ax<78;ax+=9){
@@ -144,14 +144,14 @@
   }
 
   /* ---------- Marjane ---------- */
-  scene.add(box(12,10,54,M.ctx,102,0,31));
-  scene.add(box(13,0.7,55,M.ctxRoof,102,10,31));
-  scene.add(box(4,2.4,18,M.white,94.5,10.1,31));
-  scene.add(box(0.4,3.6,16,M.white,95.7,6.0,31));          // caisson d'enseigne
-  scene.add(box(0.5,0.4,16.2,M.mjRed,95.7,9.6,31,false));
+  scene.add(box(12,10,48,M.ctx,104,0,36));
+  scene.add(box(13,0.7,49,M.ctxRoof,104,10,36));
+  scene.add(box(4,2.4,18,M.white,96.5,10.1,36));
+  scene.add(box(0.4,3.6,16,M.white,97.7,6.0,36));          // caisson d'enseigne
+  scene.add(box(0.5,0.4,16.2,M.mjRed,97.7,9.6,36,false));
   var msign=logoPanel('marjane','#FFFFFF','#D2112B',14,3.0);
-  msign.position.set(95.45,7.8,31); msign.rotation.y=-Math.PI/2; scene.add(msign);
-  var ml=logo('marjane','#FFFFFF','#D2112B',26); ml.position.set(102,17,31); scene.add(ml);
+  msign.position.set(97.45,7.8,36); msign.rotation.y=-Math.PI/2; scene.add(msign);
+  var ml=logo('marjane','#FFFFFF','#D2112B',26); ml.position.set(104,17,36); scene.add(ml);
 
   /* ---------- station gaz et lavage, ensemble, en face du bâtiment ---------- */
   at(20,12,37,16,M.pave,0.05);
@@ -188,9 +188,9 @@
   at(0,0,18,62,M.asphalt,0.06);      // dégagement ouest, le long de la route
   at(18,6,78,6,M.asphalt,0.06);      // allée sud
   at(12,28,84,6,M.asphalt,0.06);     // allée nord
-  at(28,51,50,5,M.asphalt,0.06);     // allée arrière
-  at(79,6,17,44,M.asphalt,0.06);     // parking principal, entre le bâtiment et Marjane
-  at(30,56,45,5,M.asphalt,0.06);     // parking arrière, derrière le bâtiment
+  at(-20,52,170,10,M.road,0.06);     // route derrière le bâtiment
+  at(79,4,18,46,M.asphalt,0.06);     // parking principal, entre le bâtiment et Marjane
+  at(-20,50,170,2,M.pave,0.07);      // trottoir le long de la route arrière
 
   /* marquage au sol */
   var mk=new THREE.MeshBasicMaterial({color:0xE9EAE6});
@@ -203,13 +203,16 @@
     g.rotation.x=-Math.PI/2; g.position.set((x0+x1)/2,0.1,62-y); scene.add(g);
   }
   // parking principal : deux rangées face à Marjane
-  [[79,84],[90,95]].forEach(function(r){
-    for(var i=0;i<=14;i++){ sepH(8+i*2.5,r[0],r[1]); }
-    sepV(r[0],8,35); sepV(r[1],8,35);
+  [[79.5,84.5],[91,96]].forEach(function(r){
+    for(var i=0;i<=16;i++){ sepH(7+i*2.5,r[0],r[1]); }
+    sepV(r[0],7,40); sepV(r[1],7,40);
   });
-  // parking arrière, personnel
-  for(var j=0;j<=18;j++){ sepV(30+j*2.5,56,5); }
-  sepH(56,30,75); sepH(61,30,75);
+  // bande axiale de la route arrière
+  var axis2=new THREE.MeshBasicMaterial({color:0xE2E4DF});
+  for(var ax2=-16;ax2<146;ax2+=9){
+    var g2=new THREE.Mesh(new THREE.PlaneGeometry(4.5,0.2),axis2);
+    g2.rotation.x=-Math.PI/2; g2.position.set(ax2,0.14,62-57); scene.add(g2);
+  }
 
   /* arbres */
   function tree(x,y,s){
@@ -219,7 +222,7 @@
   }
   [22,34,46,58,70].forEach(function(x){ tree(x,31,0.85); });
   [10,18,26].forEach(function(y){ tree(59,y,0.8); });
-  [12,22,32,42].forEach(function(y){ tree(77,y,0.8); });
+  [10,20,30,40].forEach(function(y){ tree(77.5,y,0.8); });
 
   /* ---------- bâtiment ---------- */
   var BZ0=4, BZ1=11, H=4.7, PAR=0.5;
@@ -346,8 +349,8 @@
     g.add(box(2.1,0.6,1.55,mat(0x2B3136),0.2,1.0,0,false));
     g.position.set(x,0,62-y); scene.add(g);
   }
-  carE(81.5,16.25,0xD8DAD6); carE(81.5,28.75,0x3C4E63);
-  carE(92.5,21.25,0x8A3F38); carE(92.5,36.25,0xBFC2BD);
+  carE(82,15.25,0xD8DAD6); carE(82,30.25,0x3C4E63);
+  carE(93.5,20.25,0x8A3F38); carE(93.5,37.75,0xBFC2BD);
 
   /* voitures qui passent sur la route publique */
   var traffic=[];
@@ -369,6 +372,8 @@
   roadCar(0xC3C6C1,'x',20,-9,1,12);
   roadCar(0x4A6A80,'x',86,-3,-1,10);
   roadCar(0xD8DAD6,'x',52,-3,-1,13);
+  roadCar(0x8A3F38,'x',30,54.5,1,11);
+  roadCar(0xBFC2BD,'x',96,59.5,-1,12);
   function moveTraffic(dt){
     for(var i=0;i<traffic.length;i++){
       var c=traffic[i], p=c.g.position;
