@@ -20,6 +20,33 @@
   </div>
 </div>
 
+<div class="switch" id="switch">
+  <button type="button" data-view="3d" class="on">3D</button>
+  <button type="button" data-view="plan">Plan</button>
+</div>
+
+<div class="sheet" id="sheet" hidden>
+  <div class="sheet-inner">
+    <h2>Plan du bâtiment<span>8,00 &times; 30,00 m — 240 m² — échelle 1:100</span></h2>
+    <div class="dw" id="planSheet"></div>
+    <table class="surf">
+      <tr><th colspan="2">Espace gaming — 160 m²</th></tr>
+      <tr><td>Réserve et local technique</td><td>16 m²</td></tr>
+      <tr><td>PC gaming — 8 postes</td><td>24 m²</td></tr>
+      <tr><td>Consoles et écrans</td><td>24 m²</td></tr>
+      <tr><td>Jeux à jetons grand format</td><td>32 m²</td></tr>
+      <tr><td>Arcade à jetons — 30 bornes</td><td>48 m²</td></tr>
+      <tr><td>Accueil, monnayeur et casiers</td><td>16 m²</td></tr>
+      <tr><th colspan="2">Fast food — 80 m²</th></tr>
+      <tr><td>WC unique et réserve</td><td>16 m²</td></tr>
+      <tr><td>Commande et attente</td><td>20 m²</td></tr>
+      <tr><td>Comptoir et caisse</td><td>12 m²</td></tr>
+      <tr><td>Cuisine</td><td>24 m²</td></tr>
+      <tr><td>Chambre froide et stock</td><td>8 m²</td></tr>
+    </table>
+  </div>
+</div>
+
 <script src="assets/js/vendor/three.min.js"></script>
 <script>
 if(!window.THREE){
@@ -27,5 +54,20 @@ if(!window.THREE){
 }
 </script>
 <script src="assets/js/scene3d.js"></script>
+<script src="assets/js/plan.js"></script>
+<script>
+(function(){
+  var sw=document.getElementById('switch'), sh=document.getElementById('sheet'),
+      vb=document.querySelector('.vbar');
+  if(!sw||!sh) return;
+  sw.addEventListener('click',function(e){
+    var b=e.target.closest('button'); if(!b) return;
+    var plan = b.dataset.view==='plan';
+    if(plan){ sh.removeAttribute('hidden'); } else { sh.setAttribute('hidden',''); }
+    if(vb) vb.style.display = plan?'none':'flex';
+    Array.prototype.forEach.call(sw.children,function(x){ x.classList.toggle('on',x===b); });
+  });
+})();
+</script>
 </body>
 </html>
