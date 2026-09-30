@@ -312,72 +312,78 @@ var MARJANE_LOGO = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfoAAAA5CAYAAA
   roof.add(box(BL+0.3,PAR,0.25,M.parapet,BL/2,H+0.22,BW+0.02));
   roof.add(box(0.25,PAR,BW+0.4,M.parapet,-0.02,H+0.22,BW/2));
   roof.add(box(0.25,PAR,BW+0.4,M.parapet,BL+0.02,H+0.22,BW/2));
-  roof.add(box(7.0,1.15,0.3,M.blue,13,H+0.15,BW+0.2));     // enseigne gaming
-  roof.add(box(5.0,1.15,0.3,M.ochre,26,H+0.15,BW+0.2));    // enseigne fast food
+  roof.add(box(7.0,1.15,0.3,M.blue,11,H+0.15,BW+0.2));     // enseigne gaming
+  roof.add(box(5.0,1.15,0.3,M.ochre,25,H+0.15,BW+0.2));    // enseigne fast food
 
-  bldg.add(box(1.8,2.6,0.16,M.dark,21,0,BW+0.02,false));   // entrée gaming
-  bldg.add(box(1.6,2.6,0.16,M.dark,25.5,0,BW+0.02,false)); // entrée fast food
-  bldg.add(box(3.4,0.16,1.8,M.white,21,3.2,BW+0.9));
-  bldg.add(box(3.2,0.16,1.8,M.white,25.5,3.2,BW+0.9));
+  bldg.add(box(1.3,2.6,0.16,M.dark,19.05,0,BW+0.02,false));// entrée gaming
+  bldg.add(box(1.3,2.6,0.16,M.dark,23.15,0,BW+0.02,false));// entrée fast food
+  bldg.add(box(2.9,0.16,1.8,M.white,19.05,3.2,BW+0.9));
+  bldg.add(box(2.9,0.16,1.8,M.white,23.15,3.2,BW+0.9));
 
   /* ---------- aménagement intérieur ---------- */
   var it=new THREE.Group(); bldg.add(it);
-  [2,5,10,14,20,22,24].forEach(function(x){
+  [2,5,8,12,18,20,22,24.5,26,29].forEach(function(x){
     it.add(box(0.1,3.0,BW,M.panelSide,x,0,BW/2,false));
   });
 
-  // personnel / stock  x 0..2 ; tournois x 2..5
-  [3.0,3.9].forEach(function(x){
-    it.add(box(0.7,0.75,0.9,M.dark,x,0,1.6,false));
-    it.add(box(0.7,0.75,0.9,M.dark,x,0,6.4,false));
-  });
-  // arcade à jetons x 5..10
-  [[5.9,1.0],[7.3,1.0],[8.7,1.0],[5.9,7.0],[7.3,7.0],[8.7,7.0]].forEach(function(q){
-    it.add(box(0.95,1.9,1.05,M.ochre,q[0],0,q[1]));
-    it.add(box(0.8,0.7,0.15,M.screen,q[0],1.0,q[1]+(q[1]<4?0.6:-0.6),false));
-  });
-  it.add(box(1.6,2.2,1.6,M.red,6.6,0,4.0));
-  it.add(box(1.6,2.2,1.6,M.blue,8.8,0,4.0));
-  // consoles x 10..14
-  for(var c2=0;c2<4;c2++){
-    var cx=10.9+c2*0.95;
-    it.add(box(1.6,1.2,0.1,M.screen2,10.9+c2*0.95,1.6,0.3,false));
+  // réserve et local technique 0..2
+  it.add(box(1.6,2.0,0.6,M.panelSide,1.0,0,0.5));
+  it.add(box(1.6,2.0,0.6,M.panelSide,1.0,0,BW-0.5));
+  // pc gaming 2..5 : 8 postes
+  it.add(box(2.5,0.75,0.85,M.dark,3.5,0,0.65));
+  it.add(box(2.5,0.75,0.85,M.dark,3.5,0,BW-0.65));
+  for(var k=0;k<4;k++){
+    var px=2.6+k*0.6;
+    it.add(box(0.4,0.42,0.06,M.screen,px,0.78,0.95,false));
+    it.add(box(0.4,0.42,0.06,M.screen,px,0.78,BW-0.95,false));
+    it.add(box(0.45,0.5,0.45,M.red,px,0,1.55,false));
+    it.add(box(0.45,0.5,0.45,M.red,px,0,BW-1.55,false));
   }
-  [[11.2],[13.0]].forEach(function(q){
-    it.add(box(1.5,1.2,0.1,M.screen2,q[0],1.6,0.3,false));
-    it.add(box(1.5,1.2,0.1,M.screen2,q[0],1.6,7.7,false));
-    it.add(box(1.5,0.6,1.0,M.blue,q[0],0,1.6,false));
-    it.add(box(1.5,0.6,1.0,M.blue,q[0],0,6.4,false));
-  });
-  // pc gaming x 14..20 : deux rangées de 6
-  it.add(box(5.6,0.75,0.85,M.dark,17,0,0.9));
-  it.add(box(5.6,0.75,0.85,M.dark,17,0,7.1));
-  for(var k=0;k<6;k++){
-    var px=14.7+k*0.95;
-    it.add(box(0.72,0.42,0.06,M.screen,px,0.78,1.2,false));
-    it.add(box(0.72,0.42,0.06,M.screen,px,0.78,6.8,false));
-    it.add(box(0.5,0.5,0.5,M.red,px,0,2.0,false));
-    it.add(box(0.5,0.5,0.5,M.red,px,0,6.0,false));
-    it.add(box(0.5,0.55,0.12,M.dark,px,0.5,2.0,false));
-    it.add(box(0.5,0.55,0.12,M.dark,px,0.5,6.0,false));
+  // consoles 5..8
+  for(var c2=0;c2<3;c2++){
+    var cx=5.7+c2*0.85;
+    it.add(box(0.6,1.1,0.1,M.screen2,cx,1.6,0.3,false));
+    it.add(box(0.6,1.1,0.1,M.screen2,cx,1.6,BW-0.3,false));
+    it.add(box(0.6,0.6,1.0,M.blue,cx,0,1.2,false));
+    it.add(box(0.6,0.6,1.0,M.blue,cx,0,BW-1.2,false));
   }
-  // accueil et jetons x 20..22
-  it.add(box(1.6,1.1,0.9,M.white,21,0,1.2));
-  it.add(box(1.65,0.1,0.95,M.blue,21,1.1,1.2,false));
-  it.add(box(1.6,1.9,0.5,M.panelSide,21,0,7.3));
-  // sanitaires x 22..24 ; salle x 24..27
-  for(var a=0;a<3;a++){ for(var b2=0;b2<2;b2++){
-    var tx=24.6+a*0.85, tz=2.4+b2*3.0;
-    var t=new THREE.Mesh(new THREE.CylinderGeometry(0.42,0.42,0.75,12),M.white);
-    t.position.set(tx,0.38,tz); t.castShadow=true; it.add(t);
-    it.add(box(0.4,0.45,0.4,M.ochre,tx,0,tz-0.75,false));
-    it.add(box(0.4,0.45,0.4,M.ochre,tx,0,tz+0.75,false));
-  }}
-  // comptoir x 27..28 ; cuisine x 28..30
-  it.add(box(0.9,1.15,6.4,M.white,27.5,0,BW/2));
-  it.add(box(0.95,0.1,6.4,M.ochre,27.5,1.15,BW/2,false));
-  it.add(box(0.7,1.0,7.0,M.steel,29.4,0,BW/2));
-  it.add(box(1.6,1.0,0.7,M.steel,28.8,0,0.6));
+  // jeux à jetons grand format 8..12
+  [[9.5,1.3],[9.5,4.0],[9.5,6.7]].forEach(function(q){
+    it.add(box(2.2,0.85,1.3,M.blue,q[0],0,q[1]));
+    it.add(box(2.3,0.12,1.4,M.white,q[0],0.85,q[1],false));
+  });
+  [[11.4,1.15],[11.4,2.95],[11.4,4.75],[11.4,6.55]].forEach(function(q){
+    it.add(box(0.8,2.1,1.5,M.ochre,q[0],0,q[1]));
+  });
+  // arcade à jetons 12..18 : 26 bornes
+  for(var n=0;n<8;n++){
+    it.add(box(0.56,1.9,0.95,M.ochre,12.53+n*0.72,0,0.7));
+    it.add(box(0.56,1.9,0.95,M.ochre,12.53+n*0.72,0,BW-0.7));
+  }
+  for(var m3=0;m3<7;m3++){
+    it.add(box(0.56,1.9,0.9,M.red,12.78+m3*0.72,0,3.5));
+    it.add(box(0.56,1.9,0.9,M.blue,12.78+m3*0.72,0,4.5));
+  }
+  // accueil 18..20
+  it.add(box(0.55,1.1,2.6,M.white,18.5,0,1.7));
+  it.add(box(0.6,0.1,2.65,M.blue,18.5,1.1,1.7,false));
+  it.add(box(1.5,1.9,2.35,M.panelSide,19.0,0,6.55));
+
+  // fast food : wc + réserve 20..22
+  it.add(box(1.6,2.4,2.3,M.panelSide,21.0,0,1.4));
+  it.add(box(1.6,2.4,4.9,M.panelSide,21.0,0,5.3));
+  // commande et attente 22..24,5 : tablettes hautes
+  it.add(box(2.0,1.05,0.45,M.white,23.3,0,0.5));
+  it.add(box(2.0,1.05,0.45,M.white,23.3,0,BW-0.5));
+  // comptoir 24,5..26
+  it.add(box(0.9,1.15,7.0,M.white,25.2,0,BW/2));
+  it.add(box(0.95,0.1,7.0,M.ochre,25.2,1.15,BW/2,false));
+  // cuisine 26..29
+  it.add(box(2.6,1.0,0.75,M.steel,27.5,0,0.6));
+  it.add(box(2.6,1.0,0.75,M.steel,27.5,0,BW-0.6));
+  // froid et stock 29..30
+  it.add(box(0.7,2.2,3.4,M.panelSide,29.5,0,2.0));
+  it.add(box(0.7,2.2,3.4,M.panelSide,29.5,0,6.0));
 
   /* ---------- terrasse, cheminement, pelouse ---------- */
   at(48,40,30,2,M.pave,0.08);
@@ -517,11 +523,11 @@ var MARJANE_LOGO = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfoAAAA5CAYAAA
 
   /* étiquettes des deux zones */
   var lff=label('FAST FOOD','#C98A2E','#FFFFFF',15);
-  lff.position.set(74,9.5,16); scene.add(lff);
+  lff.position.set(73,9.5,16); scene.add(lff);
   var lpk=label('PARKING','#5A6066','#FFFFFF',13);
   lpk.position.set(96.5,7,62-27); scene.add(lpk);
   var lgz=label('ESPACE GAMING','#2F6E9C','#FFFFFF',18);
-  lgz.position.set(61,9.5,16); scene.add(lgz);
+  lgz.position.set(58,9.5,16); scene.add(lgz);
 
   /* ---------- navigation ---------- */
   var drag=false, lx=0, ly=0;
