@@ -38,32 +38,47 @@ html,body{ height:100%; margin:0; background:#0E1418; overflow:hidden;
 .sheet-inner{ max-width:1080px; margin:0 auto; padding:28px 20px 40px }
 .sheet h2{ font:600 22px/1.2 Archivo,sans-serif; margin:0 0 22px; letter-spacing:-.01em }
 .sheet h2 span{ display:block; margin-top:6px; font:400 13px/1.3 "IBM Plex Mono",ui-monospace,monospace; color:#5E686E }
-.sheet .dw{ background:#F6F7F4; border:1px solid #C5C9C2; padding:10px; overflow-x:auto }
-.sheet .dw svg{ display:block; min-width:660px; margin:0 auto }
+.sheet .dw{ background:#FFFFFF; border:1px solid #BFC3BC; padding:0; overflow-x:auto }
+.sheet .dw svg{ display:block; min-width:720px; margin:0 auto }
 table.surf{ border-collapse:collapse; width:100%; max-width:520px; margin-top:26px; font-size:14px }
 table.surf th,table.surf td{ text-align:left; padding:8px 12px; border-bottom:1px solid #C5C9C2 }
 table.surf th{ font-weight:600; font-size:12px; color:#4B575E; border-bottom:1.5px solid #161E24; padding-top:18px }
 table.surf td:last-child{ text-align:right; font-family:"IBM Plex Mono",ui-monospace,monospace; white-space:nowrap }
 
-/* ---- conventions de dessin ---- */
+/* ---- conventions de dessin : encre noire sur fond blanc ---- */
 .dw{ font-family:"IBM Plex Mono",ui-monospace,monospace }
-.dw .fill-gz{ fill:#D9E5EE } .dw .fill-ff{ fill:#F2E3C8 } .dw .fill-glass{ fill:#BBD2DE }
-.dw .st{ fill:none;stroke:#161E24;stroke-width:1;vector-effect:non-scaling-stroke }
-.dw .st-thin{ fill:none;stroke:#8A9298;stroke-width:.8;vector-effect:non-scaling-stroke }
-.dw .st-wall{ fill:none;stroke:#161E24;stroke-width:3;vector-effect:non-scaling-stroke }
-.dw .st-part{ fill:none;stroke:#161E24;stroke-width:1.4;vector-effect:non-scaling-stroke }
-.dw .st-zone{ fill:none;stroke:#161E24;stroke-width:2.2;vector-effect:non-scaling-stroke }
-.dw .st-dim{ fill:none;stroke:#161E24;stroke-width:.9;vector-effect:non-scaling-stroke }
-.dw .st-ochre{ fill:none;stroke:#B4792A;stroke-width:2.4;vector-effect:non-scaling-stroke }
-.dw .st-blue{ fill:none;stroke:#2A5F86;stroke-width:2.4;vector-effect:non-scaling-stroke }
-.dw .furn{ fill:#FFFFFF;stroke:#5E686E;stroke-width:1;vector-effect:non-scaling-stroke }
-.dw .furn-d{ fill:#C9D0D4;stroke:#5E686E;stroke-width:1;vector-effect:non-scaling-stroke }
-.dw text{ fill:#161E24 }
+.dw svg{ background:#FFFFFF }
+/* traits */
+.dw .frame{ fill:none;stroke:#0E0E0E;stroke-width:2;vector-effect:non-scaling-stroke }
+.dw .box{ fill:#FFFFFF;stroke:#0E0E0E;stroke-width:1;vector-effect:non-scaling-stroke }
+.dw .ink-th{ fill:none;stroke:#0E0E0E;stroke-width:2.6;vector-effect:non-scaling-stroke }
+.dw .ink-md{ fill:none;stroke:#0E0E0E;stroke-width:1.8;vector-effect:non-scaling-stroke }
+.dw .ink{ fill:none;stroke:#0E0E0E;stroke-width:1.2;vector-effect:non-scaling-stroke }
+.dw .ink-fine{ fill:none;stroke:#0E0E0E;stroke-width:.8;vector-effect:non-scaling-stroke }
+.dw .hair{ fill:none;stroke:#9A9A9A;stroke-width:.7;vector-effect:non-scaling-stroke }
+.dw .lot{ fill:none;stroke:#0E0E0E;stroke-width:2.4;stroke-dasharray:20 5 3 5;vector-effect:non-scaling-stroke }
+.dw .axis{ fill:none;stroke:#9A9A9A;stroke-width:.8;stroke-dasharray:16 4 2 4;vector-effect:non-scaling-stroke }
+.dw .dash{ fill:none;stroke:#0E0E0E;stroke-width:1.1;stroke-dasharray:8 5;vector-effect:non-scaling-stroke }
+.dw .dash-f{ fill:none;stroke:#555555;stroke-width:.85;stroke-dasharray:4 3;vector-effect:non-scaling-stroke }
+.dw .mark{ fill:none;stroke:#8E8E8E;stroke-width:.9;vector-effect:non-scaling-stroke }
+.dw .dim{ fill:none;stroke:#0E0E0E;stroke-width:.9;vector-effect:non-scaling-stroke }
+.dw .ext{ fill:none;stroke:#0E0E0E;stroke-width:.55;vector-effect:non-scaling-stroke }
+/* aplats */
+.dw .white{ fill:#FFFFFF;stroke:#0E0E0E;stroke-width:1.1;vector-effect:non-scaling-stroke }
+.dw .grey{ fill:#E7E8E5;stroke:#0E0E0E;stroke-width:1;vector-effect:non-scaling-stroke }
+.dw .dark{ fill:#C2C4C0;stroke:#0E0E0E;stroke-width:1;vector-effect:non-scaling-stroke }
+.dw .solid{ fill:#0E0E0E;stroke:none }
+/* ecritures */
+.dw text{ fill:#0E0E0E }
 .dw .t-dim{ font-size:11px }
-.dw .t-room{ font-size:11.5px;font-weight:500;fill:#3B464C }
-.dw .t-small{ font-size:10px;fill:#5E686E }
-.dw .t-tiny{ font-size:8.5px;fill:#5E686E }
-.dw .t-zone{ font-size:17px;font-weight:600;letter-spacing:.06em }
+.dw .t-room{ font-size:12px;font-weight:600;letter-spacing:.04em }
+.dw .t-small{ font-size:10px;fill:#2B2B2B }
+.dw .t-tiny{ font-size:8.6px;fill:#3A3A3A }
+.dw .t-ctx{ font-size:11px;fill:#6E6E6E;letter-spacing:.14em }
+.dw .t-zone{ font-size:16px;font-weight:600;letter-spacing:.08em }
+.dw .t-ttl{ font-size:15px;font-weight:600;letter-spacing:.02em }
+.dw .t-cart{ font-size:9.5px;fill:#3A3A3A }
+.dw .t-cartb{ font-size:11px;font-weight:600 }
 .dw .t-lbl{ font-size:11px;font-weight:500 }
 
 /* ---- bascule 3D / Plan ---- */
@@ -75,3 +90,5 @@ table.surf td:last-child{ text-align:right; font-family:"IBM Plex Mono",ui-monos
 .switch button + button{ border-left:1px solid rgba(22,30,36,.22) }
 .switch button.on{ background:#161E24; color:#F4F5F2 }
 .switch button:focus-visible{ outline:2px solid #E7C061; outline-offset:-2px }
+
+.vbar button[aria-label]{ min-width:42px; font-size:16px; line-height:1; padding:9px 10px }
