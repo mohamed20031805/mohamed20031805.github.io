@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Marjane Fqih Ben Saleh — complexe commercial et loisirs</title>
+<title>Marjane Fqih Ben Saleh — station, lavage et parking</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
@@ -12,11 +12,13 @@
 <body>
 <div class="viewer" id="viewer">
   <canvas id="scene"></canvas>
-  <h1 class="sheet-title">Marjane Fqih Ben Saleh<span>Complexe commercial et loisirs — fast food et espace gaming</span></h1>
+  <h1 class="sheet-title">Marjane Fqih Ben Saleh<span>Station Afriquia, lavage auto et parking</span></h1>
   <div class="compass"><span>&uarr;</span>N</div>
   <div class="vbar">
-    <button id="btnRoof" type="button">Enlever le toit</button>
+    <button id="btnWash" type="button">Zoom lavage</button>
     <button id="btnView" type="button">Vue initiale</button>
+    <button id="btnOut" type="button" aria-label="Dézoomer">&minus;</button>
+    <button id="btnIn" type="button" aria-label="Zoomer">+</button>
   </div>
 </div>
 
@@ -27,22 +29,25 @@
 
 <div class="sheet" id="sheet" hidden>
   <div class="sheet-inner">
-    <h2>Plan du bâtiment<span>8,00 &times; 30,00 m — 240 m² — échelle 1:100</span></h2>
-    <div class="dw" id="planSheet"></div>
+    <h2>A-01 &middot; Plan de masse<span>Terrain 130,00 &times; 62,00 m &mdash; &eacute;chelle 1:400</span></h2>
+    <div class="dw" id="planSite"></div>
+    <h2 style="margin-top:34px">A-02 &middot; Piste de lavage camionnette<span>Plan 4,00 &times; 12,00 m &mdash; &eacute;chelle 1:50</span></h2>
+    <div class="dw" id="planWash"></div>
+    <h2 style="margin-top:34px">A-03 &middot; Poste de lavage<span>&Eacute;l&eacute;vation &mdash; &eacute;chelle 1:50</span></h2>
+    <div class="dw" id="planElev"></div>
     <table class="surf">
-      <tr><th colspan="2">Espace gaming — 160 m²</th></tr>
-      <tr><td>Réserve et local technique</td><td>16 m²</td></tr>
-      <tr><td>PC gaming — 8 postes</td><td>24 m²</td></tr>
-      <tr><td>Consoles et écrans</td><td>24 m²</td></tr>
-      <tr><td>Jeux à jetons grand format</td><td>32 m²</td></tr>
-      <tr><td>Arcade à jetons — 30 bornes</td><td>48 m²</td></tr>
-      <tr><td>Accueil, monnayeur et casiers</td><td>16 m²</td></tr>
-      <tr><th colspan="2">Fast food — 80 m²</th></tr>
-      <tr><td>WC unique et réserve</td><td>16 m²</td></tr>
-      <tr><td>Commande et attente</td><td>20 m²</td></tr>
-      <tr><td>Comptoir et caisse</td><td>12 m²</td></tr>
-      <tr><td>Cuisine</td><td>24 m²</td></tr>
-      <tr><td>Chambre froide et stock</td><td>8 m²</td></tr>
+      <tr><th colspan="2">Surfaces</th></tr>
+      <tr><td>Terrain — 130,00 × 62,00 m</td><td>8 060 m²</td></tr>
+      <tr><td>Station Afriquia (parcelle) — 38,00 × 22,00 m</td><td>836 m²</td></tr>
+      <tr><td>Auvent de la station — 21,00 × 17,00 m</td><td>357 m²</td></tr>
+      <tr><td>Lavage auto sous auvent — 10,00 × 12,00 m</td><td>120 m²</td></tr>
+      <tr><td>Piste camionnette — 4,00 × 12,00 m</td><td>48 m²</td></tr>
+      <tr><td>Bureau avec WC intégré — 8,00 × 8,00 m</td><td>64 m²</td></tr>
+      <tr><td>Local technique — 1,00 × 1,00 m</td><td>1 m²</td></tr>
+      <tr><td>Parking — 162 places de 2,50 × 5,00 m</td><td>3 105 m²</td></tr>
+      <tr><td>Jardin — 38,00 × 6,00 m</td><td>228 m²</td></tr>
+      <tr><td>Aire libre — 20,00 × 12,00 m</td><td>240 m²</td></tr>
+      <tr><td>Voies internes, dessertes et allées</td><td>1 275 m²</td></tr>
     </table>
   </div>
 </div>
